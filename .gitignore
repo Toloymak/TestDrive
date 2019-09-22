@@ -1,2 +1,4 @@
-.idea
-*/obj/*
+.idea/
+.vs/
+obj/
+bin/

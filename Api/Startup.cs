@@ -2,14 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using AutoMapper.Configuration;
+using Core.Mapping;
+using DatabaseLayer;
+using DatabaseLayer.Entities.Blocks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 
 namespace Api
 {
@@ -26,6 +31,11 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddScoped<DriveContext>();
+            services.AddSingleton<IMapper>(
+                new Mapper(new MapperConfiguration(x => x.AddProfile(new MappingProfile()))));
+            services.AddScoped<BlockWriter>();
+            services.AddScoped<BlockReader>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
