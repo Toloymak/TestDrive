@@ -1,0 +1,19 @@
+.cell {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	background: #2e354e;
+	color: #fff;
+	height: 80px;
+	box-shadow: 0 0 24px rgba(44, 41, 77, 0.13);
+	border-radius: 10px;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 21px;
+	line-height: 25px;
+	margin-top: 21px;
+}
+
+.cellEdit {
+	position: relative;
+}

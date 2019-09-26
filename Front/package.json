@@ -1,0 +1,49 @@
+{
+  "name": "TestDrive",
+  "version": "1.0.0",
+  "description": "Рабочее место для Лехи",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --config webpack.config.js --mode development",
+    "build": "webpack --mode production ./src/index.js --output ./dist/main.js",
+    "serverStart": "set NODE_ENV=production&& node ./server.js"
+  },
+  "dependencies": {
+    "babel-preset-es2015": "^6.24.1",
+    "@skbkontur/react-icons": "^3.1.3",
+    "express": "^4.15.4",
+    "@skbkontur/react-ui": "1.0.0",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^2.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.1.14",
+    "file-loader": "^4.0.0",
+    "nodemon": "^1.12.5"
+  },
+  "babel": {
+    "presets": [
+      "@babel/env",
+      "@babel/react"
+    ],
+    "plugins": [
+      "syntax-dynamic-import"
+    ]
+  },
+  "optionalDependencies": {
+    "mini-css-extract-plugin": "^0.5.0"
+  }
+}
