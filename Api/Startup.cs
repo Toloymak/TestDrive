@@ -30,7 +30,7 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddScoped<DriveContext>();
             services.AddSingleton<IMapper>(
                 new Mapper(new MapperConfiguration(x => x.AddProfile(new MappingProfile()))));
@@ -52,7 +52,7 @@ namespace Api
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseMvcWithDefaultRoute();
         }
     }
 }
