@@ -5,7 +5,7 @@ import {Header} from './Header/Header';
 import {Body} from './Body/Body';
 import {getData} from './ContentUtils';
 
-import "./style.css";
+import "../style.css";
 
 export default class Content extends React.Component {
   constructor(props) {
