@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.WebSockets;
+using System.Threading;
 using System.Threading.Tasks;
+using Api.Hubs;
 using AutoMapper;
 using AutoMapper.Configuration;
 using Core.Mapping;
@@ -36,6 +39,7 @@ namespace Api
                 new Mapper(new MapperConfiguration(x => x.AddProfile(new MappingProfile()))));
             services.AddScoped<BlockWriter>();
             services.AddScoped<BlockReader>();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +57,24 @@ namespace Api
 
             app.UseHttpsRedirection();
             app.UseMvcWithDefaultRoute();
+            app.UseWebSockets();
+
+            app.UseSignalR(builder =>
+            {
+                builder.MapHub<BlockHub>("/socket.io");
+            });
+        }
+        
+        private async Task Echo(WebSocket webSocket)
+        {
+            byte[] buffer = new byte[1024 * 4];
+            var result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+            while (!result.CloseStatus.HasValue)
+            {
+                await webSocket.SendAsync(new ArraySegment<byte>(buffer, 0, result.Count), result.MessageType, result.EndOfMessage, CancellationToken.None);
+                result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+            }
+            await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, CancellationToken.None);
         }
     }
 }
