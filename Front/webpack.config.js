@@ -13,7 +13,7 @@ module.exports = {
     chunkFilename: "[name].bundle.js"
   },
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
+    contentBase: "./src",
     compress: true,
     port: 9000,
     watchContentBase: true,
