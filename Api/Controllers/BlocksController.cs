@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Api.Hubs;
 using AutoMapper;
 using DatabaseLayer.Entities.Blocks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Api.Controllers
 {
@@ -20,17 +22,25 @@ namespace Api.Controllers
         }
         
         [HttpGet]
-        public IActionResult Get(Guid? id)
+        public IActionResult Get()
         {
-            if (!id.HasValue)
-                return Ok(this.blockReader.GetAll);
+            var hub = new BlockHub();
 
-            var block = this.blockReader.Get(id.Value);
-            if (block is null)
-                return BadRequest();
-
-            return Ok(block);
+            return Ok();
         }
+//        
+//        [HttpGet]
+//        public IActionResult Get(Guid? id)
+//        {
+//            if (!id.HasValue)
+//                return Ok(this.blockReader.GetAll);
+//
+//            var block = this.blockReader.Get(id.Value);
+//            if (block is null)
+//                return BadRequest();
+//
+//            return Ok(block);
+//        }
         
         [HttpPut]
         public IActionResult Post(BlockDto dto)
