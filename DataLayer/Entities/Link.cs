@@ -11,6 +11,6 @@ namespace DatabaseLayer.Entities.Link
         public int Priority { get; set; }
         public Guid BlockId { get; set; }
         
-        public Block Block { get; set; }
+        public virtual Block Block { get; set; }
     }
 }

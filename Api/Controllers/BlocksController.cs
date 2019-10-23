@@ -21,27 +21,6 @@ namespace Api.Controllers
             this.blockReader = blockReader;
         }
         
-        [HttpGet]
-        public IActionResult Get()
-        {
-            var hub = new BlockHub();
-
-            return Ok();
-        }
-//        
-//        [HttpGet]
-//        public IActionResult Get(Guid? id)
-//        {
-//            if (!id.HasValue)
-//                return Ok(this.blockReader.GetAll);
-//
-//            var block = this.blockReader.Get(id.Value);
-//            if (block is null)
-//                return BadRequest();
-//
-//            return Ok(block);
-//        }
-        
         [HttpPut]
         public IActionResult Post(BlockDto dto)
         {

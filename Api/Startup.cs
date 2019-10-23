@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 using Api.Hubs;
 using AutoMapper;
 using AutoMapper.Configuration;
+using Core.Logic.Link;
 using Core.Mapping;
 using DatabaseLayer;
 using DatabaseLayer.Entities.Blocks;
+using DatabaseLayer.Entities.Link;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -40,6 +42,8 @@ namespace Api
             services.AddScoped<DriveContext>();
             services.AddScoped<BlockWriter>();
             services.AddScoped<BlockReader>();
+            services.AddScoped<LinkReader>();
+            services.AddScoped<LinkWriter>();
             
             services.AddCors();
             services.AddSignalR();
