@@ -21,5 +21,17 @@ namespace DatabaseLayer.Entities.Base
             
             return entity.Id;
         }
+        
+        public Guid Update(TDto dto, bool needSave = true)
+        {
+            var entity = this.Mapper.Map<TEntry>(dto);
+            this.DriveContext.Update(entity);
+            if (needSave)
+            {
+                this.DriveContext.SaveChanges();
+            }
+            
+            return entity.Id;
+        }
     }
 }

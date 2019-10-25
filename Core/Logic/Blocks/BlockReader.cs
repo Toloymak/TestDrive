@@ -32,5 +32,12 @@ namespace DatabaseLayer.Entities.Blocks
             
             return block;
         }
+
+        public BlockDto GetByName(string name) => Mapper.Map<BlockDto>(
+            All
+                .FirstOrDefault(b => string.Equals(
+                    b.Name,
+                    name,
+                    StringComparison.OrdinalIgnoreCase)));
     }
 }
