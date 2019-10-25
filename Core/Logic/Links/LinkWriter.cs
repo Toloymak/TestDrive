@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 using DatabaseLayer;
 using DatabaseLayer.Entities.Base;
+using DataLayer.Entities;
 
-namespace Core.Logic.Link
+namespace Core.Logic.Links
 {
-    public class LinkWriter: WriterBase<DatabaseLayer.Entities.Link.Link>
+    public class LinkWriter: WriterBase<Link, LinkDto>
     {
         public LinkWriter(DriveContext driveContext, IMapper mapper) 
             : base(driveContext, mapper)

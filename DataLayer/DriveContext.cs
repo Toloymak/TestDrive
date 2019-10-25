@@ -1,5 +1,5 @@
 using DatabaseLayer.Entities.Blocks;
-using DatabaseLayer.Entities.Link;
+using DataLayer.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DatabaseLayer

@@ -1,14 +1,15 @@
+﻿using System;
 using System.Collections.Generic;
-using DatabaseLayer.Entities.Base;
+using Core.Logic.Links;
 using DataLayer.Entities;
 
 namespace DatabaseLayer.Entities.Blocks
 {
-    public class Block: EntityBase
+    public class BlockWithLinkDto
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public int Priority { get; set; }
-        
-        public IList<Link> Links { get; set; }
+        public IList<LinkDto> Links { get; set; }
     }
 }

@@ -15,17 +15,33 @@ namespace Api.Controllers
         private readonly BlockReader blockReader;
         private readonly BlockWriter blockWriter;
         
-        public BlocksController(BlockWriter blockWriter, BlockReader blockReader)
+        public BlocksController(BlockWriter blockWriter,
+                                BlockReader blockReader)
         {
             this.blockWriter = blockWriter;
             this.blockReader = blockReader;
         }
-        
-        [HttpPut]
-        public IActionResult Post(BlockDto dto)
+
+        [HttpGet]
+        public IActionResult Get()
         {
-            var result = this.blockWriter.Create(dto);
+            var result = this.blockReader.GetAllDto();
             return Ok(result);
+        }
+        
+        [HttpPost]
+        public IActionResult Post([FromBody] BlockDto dto)
+        {
+            var result = blockWriter.Create(dto);
+            return Ok(result);
+        }
+        
+        [HttpGet]
+        [Route("links")]
+        public IActionResult GetLinks()
+        {
+            var blocks = blockReader.GetAllBlocksWithLink();
+            return Ok(blocks);
         }
     }
 }

@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 using Api.Hubs;
 using AutoMapper;
 using AutoMapper.Configuration;
-using Core.Logic.Link;
+using Core.Logic.Links;
 using Core.Mapping;
 using DatabaseLayer;
 using DatabaseLayer.Entities.Blocks;
-using DatabaseLayer.Entities.Link;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -37,7 +36,7 @@ namespace Api
         {
             services.AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-            services.AddSingleton<IMapper>(new Mapper(new MapperConfiguration(x => x.AddProfile(new MappingProfile()))));
+            services.AddSingleton<IMapper>(MapperManager.Create());
 
             services.AddScoped<DriveContext>();
             services.AddScoped<BlockWriter>();

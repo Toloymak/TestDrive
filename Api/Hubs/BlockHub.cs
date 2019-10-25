@@ -5,9 +5,8 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Api.Models;
-using Core.Logic.Link;
+using Core.Logic.Links;
 using DatabaseLayer.Entities.Blocks;
-using DatabaseLayer.Entities.Link;
 using Microsoft.AspNetCore.SignalR;
 
 namespace Api.Hubs
@@ -32,13 +31,7 @@ namespace Api.Hubs
         
         public override async Task OnConnectedAsync()
         {
-            var links = blockReader.GetAll.Select(b => new LinkHubModel
-            {
-                Id = 1,
-                Description = b.Name,
-                Service = b.Name,
-                Url = b.Name
-            });
+            var links = blockReader.GetAllDto();
             
             Thread.Sleep(3000);
             
@@ -50,14 +43,14 @@ namespace Api.Hubs
         
         public async Task SendMessage(string user, LinkHubModel linkHubModel)
         {
-            var blocks = blockReader.GetAll;
+            var blocks = blockReader.GetAllDto();
 
             var linkDto = new LinkDto
             {
                 Id = Guid.NewGuid(),
                 Url = linkHubModel.Url,
                 Title = linkHubModel.Description,
-                BlockId = blocks.FirstOrDefault().Id,
+                BlockId = blocks.FirstOrDefault().Id.Value,
                 Priority = 1
             };
             
