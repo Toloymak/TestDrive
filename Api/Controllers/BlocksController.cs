@@ -22,6 +22,10 @@ namespace Api.Controllers
             this.blockReader = blockReader;
         }
 
+        /// <summary>
+        /// Get all blocks
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -29,6 +33,11 @@ namespace Api.Controllers
             return Ok(result);
         }
         
+        /// <summary>
+        /// Create block
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Post([FromBody] BlockDto dto)
         {
@@ -36,6 +45,10 @@ namespace Api.Controllers
             return Ok(result);
         }
         
+        /// <summary>
+        /// Get all blocks with included links
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("links")]
         public IActionResult GetLinks()

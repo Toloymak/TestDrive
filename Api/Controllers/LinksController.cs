@@ -18,6 +18,10 @@ namespace Api.Controllers
             this.linkReader = linkReader;
         }
         
+        /// <summary>
+        /// Get all links
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -25,6 +29,10 @@ namespace Api.Controllers
             return Ok(links);
         }
 
+        /// <summary>
+        /// Get links for old react front, which are used in websockets
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("likeFront")]
         public IActionResult GetFrontLinks()
@@ -33,8 +41,13 @@ namespace Api.Controllers
             return Ok(models);
         }
         
+        /// <summary>
+        /// Create link
+        /// </summary>
+        /// <param name="linkDto"></param>
+        /// <returns></returns>
         [HttpPost]
-        public IActionResult Put([FromBody] LinkDto linkDto)
+        public IActionResult Create([FromBody] LinkDto linkDto)
         {
             var linkId = linkWriter.Create(linkDto);
             return Ok(linkId);
