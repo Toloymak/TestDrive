@@ -72,7 +72,7 @@ namespace Api
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapHub<BlockHub>("/links");
+                endpoints.MapHub<LinkHub>("/links");
             });
         }
     }

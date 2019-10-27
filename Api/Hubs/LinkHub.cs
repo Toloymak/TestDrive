@@ -11,13 +11,13 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace Api.Hubs
 {
-    public class BlockHub: Hub
+    public class LinkHub: Hub
     {
         private readonly LinkReader linkReader;
         private readonly FrontManager frontManager;
         private readonly LinkWriter linkWriter;
 
-        public BlockHub(LinkReader linkReader,
+        public LinkHub(LinkReader linkReader,
                         FrontManager frontManager,
                         LinkWriter linkWriter)
         {
@@ -45,7 +45,7 @@ namespace Api.Hubs
             await SendMessageToAllClients();
         }
         
-        public async Task Delete(Guid id)
+        public async Task DeleteMessage(Guid id)
         {
             linkWriter.Delete(id);
             
