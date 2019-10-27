@@ -13,6 +13,5 @@ namespace DatabaseLayer.Entities.Base
 
         public IList<TDto> GetAllDto() => Mapper.Map<IList<TDto>>(this.All);
         public TDto GetDto(Guid id) => Mapper.Map<TDto>(base.Get(id));
-
     }
 }

@@ -1,4 +1,5 @@
-﻿using Core.Logic.Links;
+﻿using System;
+using Core.Logic.Links;
 using DatabaseLayer.Entities.Blocks;
 using Microsoft.AspNetCore.Mvc;
 
@@ -51,6 +52,13 @@ namespace Api.Controllers
         {
             var linkId = linkWriter.Create(linkDto);
             return Ok(linkId);
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(Guid id)
+        {
+            linkWriter.Delete(id);
+            return Ok();
         }
     }
 }

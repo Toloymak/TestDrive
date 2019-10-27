@@ -1,6 +1,7 @@
 using System;
 using AutoMapper;
 using DatabaseLayer.Entities.Blocks;
+using DataLayer.Entities;
 
 namespace DatabaseLayer.Entities.Base
 {
@@ -32,6 +33,16 @@ namespace DatabaseLayer.Entities.Base
             }
             
             return entity.Id;
+        }
+
+        public bool Delete(Guid id)
+        {
+            var entity = DriveContext.Set<TEntry>().Find(id);
+            
+            DriveContext.Remove(entity);
+            DriveContext.SaveChanges();
+            
+            return true;
         }
     }
 }

@@ -15,12 +15,15 @@ namespace Api.Hubs
     {
         private readonly LinkReader linkReader;
         private readonly FrontManager frontManager;
+        private readonly LinkWriter linkWriter;
 
         public BlockHub(LinkReader linkReader,
-                        FrontManager frontManager)
+                        FrontManager frontManager,
+                        LinkWriter linkWriter)
         {
             this.linkReader = linkReader;
             this.frontManager = frontManager;
+            this.linkWriter = linkWriter;
         }
         
         public override async Task OnConnectedAsync()
@@ -39,6 +42,13 @@ namespace Api.Hubs
             else
                 frontManager.UpdateLink(frontLinkModel, linkDto);
 
+            await SendMessageToAllClients();
+        }
+        
+        public async Task Delete(Guid id)
+        {
+            linkWriter.Delete(id);
+            
             await SendMessageToAllClients();
         }
 

@@ -27,7 +27,7 @@ export function getData(callback) {
 }
 
 export function delService(id) {
-  connection.invoke("SendMessage", id);
+  connection.invoke("DeleteMessage", id);
 }
 
 export function addAndUpdate(method, data) {
