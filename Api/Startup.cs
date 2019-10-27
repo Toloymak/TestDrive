@@ -8,6 +8,7 @@ using Api.Hubs;
 using AutoMapper;
 using AutoMapper.Configuration;
 using Core.Logic.Links;
+using Core.Managers;
 using Core.Mapping;
 using DatabaseLayer;
 using DatabaseLayer.Entities.Blocks;
@@ -43,6 +44,7 @@ namespace Api
             services.AddScoped<BlockReader>();
             services.AddScoped<LinkReader>();
             services.AddScoped<LinkWriter>();
+            services.AddScoped<FrontManager>();
             
             services.AddCors();
             services.AddSignalR();

@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace DatabaseLayer.Entities.Base
 {
@@ -19,6 +20,6 @@ namespace DatabaseLayer.Entities.Base
             this.DriveContext.Set<TEntity>().Find(id);
 
         protected IQueryable<TEntity> All =>
-            this.DriveContext.Set<TEntity>();
+            this.DriveContext.Set<TEntity>().AsNoTracking();
     }
 }
