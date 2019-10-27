@@ -4,3 +4,5 @@ obj/
 bin/
 Front/node_modules
 Front/dist
+*/TestDrive.db
+*.orig
