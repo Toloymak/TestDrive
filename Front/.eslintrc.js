@@ -65,6 +65,7 @@ module.exports = {
         'no-var': 'warn',
         'prefer-object-spread': 'warn',
         'prefer-template': 'warn',
+
         radix: 'warn',
         yoda: 'warn'
     }

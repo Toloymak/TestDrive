@@ -2,11 +2,15 @@ import * as React from "react";
 import Icon from "@skbkontur/react-icons";
 import Button from "@skbkontur/react-ui/components/Button/Button";
 
-import { CREATE_DATA, UPDATE_DATA } from "../../../constants/constants";
 import "./Popup.css";
-import { addAndUpdate } from "../ContentUtils";
+import { addAndUpdate } from "../../utils";
 
 export class Popup extends React.Component {
+  constructor() {
+    super();
+    this.textareaRef =  React.createRef();
+  }
+
   componentDidMount() {
     document.addEventListener("mouseup", event => {
       const element = document.querySelector(".popup-content");
@@ -38,7 +42,7 @@ export class Popup extends React.Component {
           />
         ) : (
           <textarea
-            ref="description"
+            ref={(el)=> this.textareaRef = el}
             defaultValue={this.props.editMode ? this.props.description : ""}
             placeholder="Введите описание"
             className="popup_fieldArea"

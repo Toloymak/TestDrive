@@ -1,14 +1,22 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 
-const helpers = require('./helpers');
+const helpers = require("./helpers");
 
-const reactIcons = helpers.root('node_modules', '@skbkontur', 'react-icons');
-const nodeModules = helpers.root('node_modules');
-const src = helpers.root('src');
-const TSConfigFile = helpers.root('tsconfig.json');
+const reactIcons = helpers.root("node_modules", "@skbkontur", "react-icons");
+const nodeModules = helpers.root("node_modules");
+const src = helpers.root("src");
 
-module.exports = (isDev) => {
+const tsconfig = require("../tsconfig.json");
+const TSConfigFile = helpers.root("tsconfig.json");
+
+const tsPaths = {};
+Object.keys(tsconfig.compilerOptions.paths).forEach(t => {
+  const value = tsconfig.compilerOptions.paths[t][0];
+  tsPaths[t.replace(/\/\*$/g, "")] = helpers.root(value.replace(/\/\*$/g, ""));
+});
+
+module.exports = isDev => {
   return {
     entry: "./src/index.js",
     mode: "development",
@@ -18,16 +26,19 @@ module.exports = (isDev) => {
     },
     resolve: {
       modules: [nodeModules],
-      extensions: ['*', '.js', '.jsx', '.ts', '.tsx'],
+      extensions: ["*", ".js", ".jsx", ".ts", ".tsx"],
+      alias: {
+        ...tsPaths
+      }
     },
     module: {
       rules: [
         {
           test: /\.tsx?$/,
           use: [
-            ...(isDev ? ['cache-loader'] : []),
+            ...(isDev ? ["cache-loader"] : []),
             {
-              loader: 'ts-loader',
+              loader: "ts-loader",
               options: {
                 configFile: TSConfigFile,
                 transpileOnly: true
@@ -41,9 +52,9 @@ module.exports = (isDev) => {
           exclude: /node_modules/,
           use: [
             {
-              loader: 'babel-loader',
+              loader: "babel-loader",
               options: {
-                presets: ['@babel/preset-env', '@babel/preset-react']
+                presets: ["@babel/preset-env", "@babel/preset-react"]
               }
             }
           ],
@@ -52,12 +63,12 @@ module.exports = (isDev) => {
         {
           test: /\.less$/,
           use: [
-            isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+            isDev ? "style-loader" : MiniCssExtractPlugin.loader,
             {
-              loader: 'css-loader',
-              options: {modules: 'global'}
+              loader: "css-loader",
+              options: { modules: "global" }
             },
-            'less-loader'
+            "less-loader"
           ],
           include: [reactIcons]
         },
@@ -68,7 +79,7 @@ module.exports = (isDev) => {
             {
               loader: "css-loader",
               options: {
-                modules: 'global'
+                modules: "global"
               }
             }
           ],
@@ -76,7 +87,7 @@ module.exports = (isDev) => {
         },
         {
           test: /\.(ttf|otf|svg|eot|woff|woff2)$/,
-          loader: 'url-loader'
+          loader: "url-loader"
         },
         {
           test: /\.(png|svg|jpg|gif)$/,
@@ -86,7 +97,7 @@ module.exports = (isDev) => {
     },
     plugins: [
       new MiniCssExtractPlugin({
-        filename: isDev ? 'common.css' : '[name]-[hash].css',
+        filename: isDev ? "common.css" : "[name]-[hash].css",
         orderWarning: false
       }),
       new CaseSensitivePathsPlugin()

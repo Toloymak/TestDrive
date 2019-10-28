@@ -1,13 +1,19 @@
 import * as React from "react";
 import Spinner from "@skbkontur/react-ui/Spinner";
 
+import { getData } from "src/utils/";
+
 import { Header } from "./Header/Header";
 import { Body } from "./Body/Body";
-import { getData } from "./ContentUtils";
 
 import "../style.css";
 
-export default class Content extends React.Component {
+interface ContentState {
+  allServices: any[];
+  showedSpinner: boolean;
+}
+
+export class Content extends React.Component<{}, ContentState> {
   constructor(props) {
     super(props);
     this.state = {

@@ -6,7 +6,6 @@ import { Popup } from "../../Popup/Popup";
 import { WarningPopup } from "../../Popup/WarningPopup/WarningPopup";
 
 import { MenuItem } from "./Menu/MenuItem";
-import { delService } from "../../ContentUtils";
 
 import "./Cell.css";
 
