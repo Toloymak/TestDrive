@@ -1,14 +1,16 @@
 import * as React from "react";
 import Icon from "@skbkontur/react-icons";
 import Button from "@skbkontur/react-ui/components/Button/Button";
+import {SOCKETS} from "src/Constants";
 
 import "./Popup.css";
-import { addAndUpdate } from "../../utils";
 
 export class Popup extends React.Component {
   constructor() {
-    super();
-    this.textareaRef =  React.createRef();
+    super({});
+    this.urlRef = React.createRef();
+    this.serviceRef = React.createRef();
+    this.textareaRef = React.createRef();
   }
 
   componentDidMount() {
@@ -34,7 +36,7 @@ export class Popup extends React.Component {
         <span className="popup_nameField">{name}</span>
         {mode === "input" ? (
           <input
-            ref={name === "URL" ? "url" : "service"}
+            ref={field => name === "URL" ? this.urlRef = field : this.serviceRef = field}
             defaultValue={defaultValue}
             placeholder={placeholder}
             type="text"
@@ -54,10 +56,10 @@ export class Popup extends React.Component {
 
   addAndUpdateService() {
     this.props.showSpinner();
-    const method = this.props.editMode ? UPDATE_DATA : CREATE_DATA;
-    const url = this.refs.url.value;
-    const service = this.refs.service.value;
-    const description = this.refs.description.value;
+    const method = this.props.editMode ? SOCKETS.UPDATE_DATA : SOCKETS.CREATE_DATA;
+    const url = this.urlRef.value;
+    const service = this.serviceRef.value;
+    const description = this.textareaRef.value;
     const id = this.props.id !== undefined ? this.props.id : null;
     addAndUpdate(method, { id, url, service, description });
     this.props.close();
