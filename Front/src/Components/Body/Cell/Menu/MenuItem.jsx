@@ -3,7 +3,6 @@ import * as React from "react";
 import "./Menu.css";
 
 export class MenuItem extends React.Component {
-
   componentDidMount() {
     document.addEventListener("mouseup", event => {
       const element = document.querySelector(".menuItem");
@@ -19,9 +18,15 @@ export class MenuItem extends React.Component {
   }
 
   render() {
-    return <div className={"menuItem"}>
-        <span onClick={()=>this.props.openPopup()} className="menuItem_item">Редактировать</span>
-        <span className="menuItem_item" onClick={() => this.deleteComponent()}>Удалить</span>
+    return (
+      <div className={"menuItem"}>
+        <span onClick={() => this.props.openPopup()} className="menuItem_item">
+          Редактировать
+        </span>
+        <span className="menuItem_item" onClick={() => this.deleteComponent()}>
+          Удалить
+        </span>
       </div>
+    );
   }
 }
