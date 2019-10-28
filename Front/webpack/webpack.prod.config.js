@@ -4,9 +4,10 @@ const AssetsPlugin = require('assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
+const commonConfig = require('./webpack.common.config');
+
 const helpers = require('./helpers.js');
 const dist = helpers.root('dist');
-const commonConfig = require('./webpack.common.config');
 
 module.exports = (env, args) => webpackMerge(commonConfig(args.mode === 'development'), {
     mode: 'production',

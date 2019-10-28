@@ -1,7 +1,12 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
-const helpers = require('./helpers.js');
+const helpers = require('./helpers');
+
 const reactIcons = helpers.root('node_modules', '@skbkontur', 'react-icons');
+const nodeModules = helpers.root('node_modules');
+const src = helpers.root('src');
+const TSConfigFile = helpers.root('tsconfig.json');
 
 module.exports = (isDev) => {
   return {
@@ -11,32 +16,38 @@ module.exports = (isDev) => {
       filename: "./main.js",
       chunkFilename: "[name].bundle.js"
     },
-    plugins: [
-      new MiniCssExtractPlugin({
-        filename: "[name].css",
-        chunkFilename: "[id].css"
-      })
-    ],
+    resolve: {
+      modules: [nodeModules],
+      extensions: ['*', '.js', '.jsx', '.ts', '.tsx'],
+    },
     module: {
       rules: [
         {
+          test: /\.tsx?$/,
+          use: [
+            ...(isDev ? ['cache-loader'] : []),
+            {
+              loader: 'ts-loader',
+              options: {
+                configFile: TSConfigFile,
+                transpileOnly: true
+              }
+            }
+          ],
+          include: [src]
+        },
+        {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
-          resolve: {
-            extensions: [".js", ".jsx"]
-          },
           use: [
             {
               loader: 'babel-loader',
               options: {
-                presets: ['@babel/preset-env', '@babel/preset-react'],
-                plugins: [
-                  '@babel/plugin-proposal-object-rest-spread',
-                  '@babel/plugin-proposal-class-properties'
-                ]
+                presets: ['@babel/preset-env', '@babel/preset-react']
               }
             }
           ],
+          include: [src]
         },
         {
           test: /\.less$/,
@@ -60,13 +71,25 @@ module.exports = (isDev) => {
                 modules: 'global'
               }
             }
-          ]
+          ],
+          include: [src, nodeModules]
+        },
+        {
+          test: /\.(ttf|otf|svg|eot|woff|woff2)$/,
+          loader: 'url-loader'
         },
         {
           test: /\.(png|svg|jpg|gif)$/,
           use: ["file-loader"]
         }
       ]
-    }
+    },
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: isDev ? 'common.css' : '[name]-[hash].css',
+        orderWarning: false
+      }),
+      new CaseSensitivePathsPlugin()
+    ]
   };
 };

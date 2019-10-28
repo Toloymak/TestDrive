@@ -1,0 +1,23 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "module": "commonjs",
+    "noImplicitAny": false,
+    "target": "es6",
+    "typeRoots": [ "./node_modules/@types", "./src/ts-definitions" ],
+    "jsx": "react",
+    "sourceMap": true,
+    "emitBOM": true,
+    "lib": ["dom", "es5", "es6", "es7"],
+    "baseUrl": "./",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "src/*": ["./src/*"],
+
+      "@api/*": ["./src/api/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@shared/*": ["./src/components/shared/*"]
+    }
+  }
+}
