@@ -26,7 +26,7 @@ module.exports = isDev => {
     },
     resolve: {
       modules: [nodeModules],
-      extensions: ["*", ".js", ".jsx", ".ts", ".tsx"],
+      extensions: ["*", ".js", ".jsx", ".ts", ".tsx", ".less"],
       alias: {
         ...tsPaths
       }
@@ -134,8 +134,8 @@ module.exports = isDev => {
     },
     plugins: [
       new MiniCssExtractPlugin({
-        filename: isDev ? "common.css" : "[name]-[hash].css",
-        orderWarning: false
+        filename: 'main.css',
+        ignoreOrder: true
       }),
       new CaseSensitivePathsPlugin()
     ]

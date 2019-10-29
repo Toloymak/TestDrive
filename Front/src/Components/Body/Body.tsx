@@ -3,7 +3,7 @@ import * as React from "react";
 import { Cell } from "./Cell/Cell";
 import {AllServicesModel} from "../Content";
 
-import "./Body.less";
+import style from "./Body.module.less";
 
 interface BodyProps {
   allServices: AllServicesModel[];
@@ -12,11 +12,11 @@ interface BodyProps {
 
 export class Body extends React.Component<BodyProps, {}> {
   render() {
+    const {content, container} = style;
+    console.log(style)
     return (
-      <div className="body">
-        <div className="content">
-          <div className="serviceTable">
-            <div className="serviceTableBody">
+      <div className={style.content}>
+        <div className={container}>
               {this.props.allServices.map((item, index) => (
                 <Cell
                   {...item}
@@ -24,8 +24,6 @@ export class Body extends React.Component<BodyProps, {}> {
                   showSpinner={this.props.showSpinner}
                 />
               ))}
-            </div>
-          </div>
         </div>
       </div>
     );
