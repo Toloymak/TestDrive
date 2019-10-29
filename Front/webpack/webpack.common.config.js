@@ -63,6 +63,7 @@ module.exports = isDev => {
         {
           test: /\.less$/,
           include: [src, reactIcons],
+          exclude: /module\.less$/,
           use: [
             isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
             ...(isDev ? ['cache-loader'] : []),
@@ -71,6 +72,41 @@ module.exports = isDev => {
               options: {modules: 'global'}
             },
             'less-loader'
+          ]
+        },
+        {
+          test: /\.less$/,
+          include: /module\.less$/,
+          use: [
+            {
+              loader: MiniCssExtractPlugin.loader,
+              options: {
+                sourceMap: isDev
+              }
+            },
+            ...(isDev ? ['cache-loader'] : []),
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: isDev,
+                localsConvention: 'dashes',
+                modules: {
+                  localIdentName: isDev ? '[name]__[local]_[hash:base64:4]' : '[hash:base64]'
+                }
+              }
+            },
+            {
+              loader: 'resolve-url-loader',
+              options: {
+                keepQuery: true
+              }
+            },
+            {
+              loader: 'less-loader',
+              options: {
+                sourceMap: true
+              }
+            }
           ]
         },
         {
