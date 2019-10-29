@@ -17,9 +17,10 @@ connection
     return console.error(err.toString());
   });
 
-export function getData(callback) {
+export function getData(setAllServices, setLoader) {
   connection.on(SOCKETS.GET_DATA, function(allServices) {
-    callback({ allServices, showedSpinner: false });
+    setAllServices(allServices);
+    setLoader(false);
   });
 }
 

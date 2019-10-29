@@ -62,15 +62,16 @@ module.exports = isDev => {
         },
         {
           test: /\.less$/,
+          include: [src, reactIcons],
           use: [
-            isDev ? "style-loader" : MiniCssExtractPlugin.loader,
+            isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+            ...(isDev ? ['cache-loader'] : []),
             {
-              loader: "css-loader",
-              options: { modules: "global" }
+              loader: 'css-loader',
+              options: {modules: 'global'}
             },
-            "less-loader"
-          ],
-          include: [reactIcons]
+            'less-loader'
+          ]
         },
         {
           test: /\.css$/,
