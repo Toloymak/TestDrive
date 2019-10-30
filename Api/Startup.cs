@@ -6,6 +6,7 @@ using Core.Managers;
 using Core.Mapping;
 using DatabaseLayer;
 using DatabaseLayer.Entities.Blocks;
+using DataLayer.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -72,7 +73,9 @@ namespace Api
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<FrontLinkHub>("/frontLinks");
                 endpoints.MapHub<LinkHub>("/links");
+                endpoints.MapHub<BlockHub>("/blocks");
             });
         }
     }

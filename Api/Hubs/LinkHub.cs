@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using System.Threading.Tasks;
 using Core.Logic.Links;
-using Core.Managers;
+using DatabaseLayer.Entities.Base;
 using DatabaseLayer.Entities.Blocks;
 using Microsoft.AspNetCore.SignalR;
 
@@ -14,49 +10,64 @@ namespace Api.Hubs
     public class LinkHub: Hub
     {
         private readonly LinkReader linkReader;
-        private readonly FrontManager frontManager;
         private readonly LinkWriter linkWriter;
+        private readonly BlockReader blockReader;
 
-        public LinkHub(LinkReader linkReader,
-                        FrontManager frontManager,
-                        LinkWriter linkWriter)
+        public LinkHub(LinkReader linkReader, LinkWriter linkWriter)
         {
             this.linkReader = linkReader;
-            this.frontManager = frontManager;
             this.linkWriter = linkWriter;
         }
-        
+
         public override async Task OnConnectedAsync()
         {
             await SendMessageToAllClients();
-
             await base.OnConnectedAsync();
         }
         
-        public async Task SendMessage(string user, FrontLinkModel frontLinkModel)
+        public async Task Create(LinkDto linkDto)
         {
-            var linkDto = linkReader.GetByLink(frontLinkModel.Url);
-            
-            if (linkDto == null)
-                frontManager.CreateLink(frontLinkModel);
-            else
-                frontManager.UpdateLink(frontLinkModel, linkDto);
+            linkWriter.Create(linkDto);
+            await SendMessageToAllClients();
+        }
 
+        public async Task Update(LinkDto linkDto)
+        {
+            var oldLink = linkReader.GetDto(linkDto.Id.Value);
+            if (oldLink == null)
+            {
+                await Clients.Client(this.Context.ConnectionId).SendAsync("Error", "Block не найден в базе");
+            }
+
+            linkWriter.Update(linkDto);
             await SendMessageToAllClients();
         }
         
-        public async Task DeleteMessage(Guid id)
+        public async Task Delete(Guid id)
         {
-            linkWriter.Delete(id);
-            
+            var oldLink = linkReader.GetDto(id);
+            if (oldLink == null)
+            {
+                await Clients.Client(this.Context.ConnectionId).SendAsync("Error", "Block не найден в базе");
+            }
+
+            try
+            {
+                linkWriter.Delete(id);
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
             await SendMessageToAllClients();
         }
 
         private async Task SendMessageToAllClients()
         {
-            var links = linkReader.GetAllFrontLinkModels();
-            
-            await Clients.Client(this.Context.ConnectionId).SendAsync("Get", links);
+            var blocks = blockReader.GetAllBlocksWithLink();
+            await Clients.All.SendAsync("Get", blocks);
         }
     }
 }
