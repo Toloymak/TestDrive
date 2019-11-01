@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace Api.Hubs
 {
-    public class BlockHub: Hub
+    public class BlockHub: EntityBaseHub<BlockDto>
     {
         private readonly BlockReader blockReader;
         private readonly BlockWriter blockWriter;
