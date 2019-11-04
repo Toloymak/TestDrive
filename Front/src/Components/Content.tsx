@@ -28,17 +28,21 @@ export const Content: React.FC = () => {
   const [allServices, setAllServices] = useState([]);
   const [showedSpinner, setShowedSpinner] = useState(true);
   
-  useEffect(() => {
+  useEffect((): void => {
     setShowedSpinner(true);
     getData(setAllServices, setShowedSpinner);
   }, []);
 
+  const showSpinner = (): void => {
+    setShowedSpinner(true);
+  }
+  
   return (
     <>
       <Header showSpinner={showedSpinner} />
       <Body
         allServices={allServices}
-        showSpinner={showedSpinner}
+        showSpinner={showSpinner}
       />
       {showedSpinner && (
         <span className="spinner">

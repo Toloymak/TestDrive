@@ -21,7 +21,8 @@ module.exports = {
             jsx: true
         },
         ecmaVersion: 2019,
-        sourceType: 'module'
+        sourceType: 'module',
+        project: 'tsconfig.json'
     },
     plugins: ['prettier', 'react', 'react-hooks', '@typescript-eslint', 'promise', 'import'],
     settings: {

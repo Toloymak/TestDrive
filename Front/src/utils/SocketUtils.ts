@@ -1,33 +1,28 @@
-import * as signalR from "@aspnet/signalr";
-
-import {SOCKETS} from "src/Constants";
+import * as signalR from '@aspnet/signalr';
+import {SocketsAction} from 'src/enums';
 
 const connection = new signalR.HubConnectionBuilder()
-  .withUrl("http://localhost:5000/links")
+  .withUrl('http://localhost:5000/frontLinks')
   .build();
-
-connection.on("ReceiveMessage", function(message) {
-  console.log(`Сообщение: ${message[0].url}`);
-});
 
 connection
   .start()
   .then()
-  .catch(function(err) {
+  .catch(function (err) {
     return console.error(err.toString());
   });
 
 export function getData(setAllServices, setLoader) {
-  connection.on(SOCKETS.GET_DATA, function(allServices) {
+  connection.on(SocketsAction.get, function (allServices) {
     setAllServices(allServices);
     setLoader(false);
   });
 }
 
 export const delService = (id: string): void => {
-  connection.invoke("DeleteMessage", id);
+  connection.invoke('DeleteMessage', id);
 };
 
 export function addAndUpdate(method, data): void {
-  connection.invoke("SendMessage", "test", data);
+  connection.invoke('SendMessage', 'test', data);
 }
