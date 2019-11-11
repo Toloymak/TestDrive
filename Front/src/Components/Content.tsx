@@ -6,7 +6,7 @@ import { Header } from "./Header";
 import { Body } from "./Body";
 
 import "../style.css";
-import {useState, useEffect} from "react";
+import {useState, useEffect, useRef} from "react";
 import {createSocket} from "src/utils";
 import {SocketHubs} from 'src/enums';
 
@@ -26,20 +26,26 @@ export interface AllServicesModel {
 };
 
 export const Content: React.FC = () => {
-  let sockedFrontLinks;
+  const socketRef = useRef(createSocket(SocketHubs.frontLinks));
 
   const [allServices, setAllServices] = useState([]);
   const [showedSpinner, setShowedSpinner] = useState(true);
 
   useEffect((): void => {
     setShowedSpinner(true);
-    sockedFrontLinks = createSocket(SocketHubs.frontLinks);
-    sockedFrontLinks.getData(setAllServices);
+    socketRef.current.getData(setAllServices);
     setShowedSpinner(false);
   }, []);
 
   const showSpinner = (): void => {
     setShowedSpinner(true);
+  }
+  
+  const delLink = (id: string): void => {
+    const filteredLink = allServices.filter(item => item.id !== id);
+    setAllServices(filteredLink);
+    socketRef.current.delete(id);
+    setShowedSpinner(false);
   }
   
   return (
@@ -48,6 +54,7 @@ export const Content: React.FC = () => {
       <Body
         allServices={allServices}
         showSpinner={showSpinner}
+        delLink={delLink}
       />
       {showedSpinner && (
         <span className="spinner">

@@ -5,6 +5,10 @@ body {
   font-family: 'Segoe UI Light', sans-serif;
 }
 
+h2 {
+  margin-top: 0;
+}
+
 .content {
   width: 1239px;
 }
