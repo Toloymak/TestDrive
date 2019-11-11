@@ -7,7 +7,8 @@ import { Body } from "./Body";
 
 import "../style.css";
 import {useState, useEffect} from "react";
-import {getData} from "src/utils";
+import {createSocket} from "src/utils";
+import {SocketHubs} from 'src/enums';
 
 interface LinkModel {
   id: string;
@@ -24,13 +25,17 @@ export interface AllServicesModel {
   links: LinkModel[];
 };
 
-export const Content: React.FC = () => {  
+export const Content: React.FC = () => {
+  let sockedFrontLinks;
+
   const [allServices, setAllServices] = useState([]);
   const [showedSpinner, setShowedSpinner] = useState(true);
-  
+
   useEffect((): void => {
     setShowedSpinner(true);
-    getData(setAllServices, setShowedSpinner);
+    sockedFrontLinks = createSocket(SocketHubs.frontLinks);
+    sockedFrontLinks.getData(setAllServices);
+    setShowedSpinner(false);
   }, []);
 
   const showSpinner = (): void => {

@@ -5,7 +5,7 @@ import {HubConnection} from '@aspnet/signalr';
 import {SocketHubs, SocketsAction} from 'src/enums';
 import {SOCKETS_PORT} from 'src/Constants';
 
-export class SocketsBase {
+export class SocketBase {
   private readonly _url: string;
   private readonly _socket: HubConnection;
 
@@ -26,16 +26,22 @@ export class SocketsBase {
       .then(data => console.log(data))
       .catch(err => console.error(err.toString()));
   }
+  
+  public getData(setAllServices) {
+    this._socket.on(SocketsAction.get, allServices => {
+    setAllServices(allServices);
+  });
+}
 
-  protected create<T>(params: T): void {
+  public create<T>(params: T): void {
     this._socket.invoke(SocketsAction.create, params);
   }
 
-  protected edit<T>(params: T): void {
+  public edit<T>(params: T): void {
     this._socket.invoke(SocketsAction.update, params);
   }
 
-  protected delete(id: string): void {
+  public delete(id: string): void {
     this._socket.invoke(SocketsAction.deleted, id);
   }
 }
