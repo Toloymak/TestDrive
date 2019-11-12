@@ -13,10 +13,11 @@ namespace Api.Hubs
         private readonly LinkWriter linkWriter;
         private readonly BlockReader blockReader;
 
-        public LinkHub(LinkReader linkReader, LinkWriter linkWriter)
+        public LinkHub(LinkReader linkReader, LinkWriter linkWriter, BlockReader blockReader)
         {
             this.linkReader = linkReader;
             this.linkWriter = linkWriter;
+            this.blockReader = blockReader;
         }
 
         public override async Task OnConnectedAsync()
