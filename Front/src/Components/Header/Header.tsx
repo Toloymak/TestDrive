@@ -6,6 +6,7 @@ import Logotype from "@skbkontur/react-ui/components/Logotype/Logotype";
 import { Popup } from "../Popup/Popup";
 
 import "./Header.less";
+import {TestSocket} from './Secret/TestSockets';
 
 interface Props {
   showSpinner: Boolean;
@@ -13,6 +14,7 @@ interface Props {
 
 export const Header: React.FC<Props> = ({showSpinner}) => {
   const [visiblePopupCreate, setVisiblePopupCreate] = useState(false);
+  const [visibleListTestSocket, setVisibleListTestSocket] = useState(false);
 
   const openPopup = () => {
     setVisiblePopupCreate(true);
@@ -20,6 +22,10 @@ export const Header: React.FC<Props> = ({showSpinner}) => {
 
   const closePopup = () => {
     setVisiblePopupCreate(false);
+  }
+
+  const toggleVisibleListTestSocket = () => {
+    setVisibleListTestSocket(!visibleListTestSocket);
   }
   
   return (
@@ -37,7 +43,7 @@ export const Header: React.FC<Props> = ({showSpinner}) => {
               <span className="logo-separator" />
             </div>
           </div>
-          <span className="projectName">Тест Драйв</span>
+          <span className="projectName">Тест Др<span onClick={toggleVisibleListTestSocket}>а</span>йв</span>
         </div>
         <Button
           onClick={openPopup}
@@ -54,6 +60,9 @@ export const Header: React.FC<Props> = ({showSpinner}) => {
           />
         ) : null}
       </div>
+      {
+        visibleListTestSocket && <TestSocket visibleListTestSocket={visibleListTestSocket}/>
+      }
     </div>
   );
 }
