@@ -44,7 +44,7 @@
 }
 .testSocket {
   width: 1300px;
-  height: 700px;
+  height: auto;
   position: absolute;
   background: beige;
   z-index: 10;
@@ -52,7 +52,11 @@
   flex-direction: column;
 
   & div {
-    height: 200px;
+    height: auto;
     width: auto;
+  }
+
+  & span {
+    white-space: pre-wrap;
   }
 }
