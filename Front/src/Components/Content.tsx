@@ -1,7 +1,6 @@
 import * as React from "react";
 import Spinner from "@skbkontur/react-ui/Spinner";
 
-
 import { Header } from "./Header";
 import { Body } from "./Body";
 

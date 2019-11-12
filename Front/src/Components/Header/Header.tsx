@@ -61,7 +61,7 @@ export const Header: React.FC<Props> = ({showSpinner}) => {
         ) : null}
       </div>
       {
-        visibleListTestSocket && <TestSocket visibleListTestSocket={visibleListTestSocket}/>
+        visibleListTestSocket && <TestSocket visibleListTestSocket={visibleListTestSocket} toggleVisibleListTestSocket={toggleVisibleListTestSocket}/>
       }
     </div>
   );
