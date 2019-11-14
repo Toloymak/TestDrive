@@ -1,6 +1,5 @@
+import { HubConnection } from '@aspnet/signalr';
 import * as signalR from '@aspnet/signalr';
-import {HubConnectionBuilder} from '@aspnet/signalr';
-import {HubConnection} from '@aspnet/signalr';
 
 import {SocketHubs, SocketsAction} from 'src/enums';
 import {SOCKETS_PORT} from 'src/Constants';

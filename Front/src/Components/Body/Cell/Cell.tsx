@@ -1,121 +1,121 @@
-import * as React from "react";
-import { useState } from "react";
-import Icon from "@skbkontur/react-icons";
-import Link from "@skbkontur/react-ui/components/Link";
-
-import { Popup } from "../../Popup/Popup";
-import { WarningPopup } from "../../Popup/WarningPopup/WarningPopup";
+import Icon from '@skbkontur/react-icons';
+import Link from '@skbkontur/react-ui/components/Link';
+import React, { useState } from 'react';
+import { LinkModel } from 'src/Components/Content';
+import {Popup} from 'src/Components/Popup/Popup';
+import {WarningPopup} from 'src/Components/Popup/WarningPopup/WarningPopup';
 
 import { MenuItem } from "./Menu/MenuItem";
 import style from "./Cell.module.less";
 import Tooltip from '@skbkontur/react-ui/Tooltip';
 
-interface Props {
-  showSpinner(): void;
+interface CellsProps {
+    showSpinner(): void;
+    id: string;
+    name: string;
+    priority: number;
+    links: LinkModel[];
+    url: string;
+    service: string;
+    description: string;
+    delLink(id: string): void;
 }
 
-export const Cell: React.FC<any> = ({
-  id,
-  url,
-  service,
-  description,
-  showSpinner,
-  delLink
-}) => {
-  const [showMenu, setShowMenu] = useState(false);
-  const [visiblePopupCreate, setVisiblePopupCreate] = useState(false);
-  const [warningPopup, setWarningPopup] = useState(false);
+export const Cell: React.FC<Partial<CellsProps>> = ({ id, url, service, description, showSpinner, delLink }) => {
+    const [showMenu, setShowMenu] = useState(false);
+    const [visiblePopupCreate, setVisiblePopupCreate] = useState(false);
+    const [warningPopup, setWarningPopup] = useState(false);
 
-  const closeMenu = () => {
-    setShowMenu(false);
-  };
+    const closeMenu = (): void => {
+        setShowMenu(false);
+    };
 
-  const openPopup = () => {
-    setVisiblePopupCreate(true);
-    closeMenu();
-  };
+    const openPopup = (): void => {
+        setVisiblePopupCreate(true);
+        closeMenu();
+    };
 
-  const closePopup = () => {
-    setVisiblePopupCreate(false);
-  };
+    const closePopup = (): void => {
+        setVisiblePopupCreate(false);
+    };
 
-  const openMenu = () => {
-    setShowMenu(true);
-  };
+    const openMenu = (): void => {
+        setShowMenu(true);
+    };
 
-  const openWarningPopup = () => {
-    setWarningPopup(true);
-  };
+    const openWarningPopup = (): void => {
+        setWarningPopup(true);
+    };
 
-  const closeWarningPopup = () => {
-    setWarningPopup(false);
-  };
+    const closeWarningPopup = (): void => {
+        setWarningPopup(false);
+    };
 
-  const toggleMenu = () => {
-    showMenu ? closeMenu() : openMenu();
-  };
+    const toggleMenu = (): void => {
+        showMenu ? closeMenu() : openMenu();
+    };
 
-  const deleteService = id => {
-    showSpinner();
-    delLink(id);
-  };
+    const deleteService = (id): void => {
+        showSpinner();
+        delLink(id);
+    };
 
-  const editParams = {
-    editMode: true,
-    id,
-    url,
-    service,
-    description,
-    showSpinner,
-    delLink
-  };
+    const editParams = {
+        editMode: true,
+        id,
+        url,
+        service,
+        description,
+        showSpinner,
+        delLink
+    };
 
-  const tooltipMessage = () => (<span>{url}</span>)
+    const tooltipMessage = () => <span>{url}</span>;
 
-  return (
-    <div className={style.cell}>
-      <div className={style.cellEdit}>
-        <span className={"activeElm"} onClick={toggleMenu}>
-          <Icon name={"MenuDots"} />
-        </span>
-        {showMenu && (
-            <MenuItem
-                {...editParams}
-                openPopup={openPopup}
-                close={closeMenu}
-                openWarningPopup={openWarningPopup}
-            />
-        )}
-      </div>
+    return (
+        <div className={style.cell}>
+            <div className={style.cellEdit}>
+                <span className={'activeElm'} onClick={toggleMenu}>
+                    <Icon name={'MenuDots'} />
+                </span>
+                {showMenu && (
+                    <MenuItem
+                        {...editParams}
+                        openPopup={openPopup}
+                        close={closeMenu}
+                        openWarningPopup={openWarningPopup}
+                    />
+                )}
+            </div>
 
-      <div className={style.header}>
-        <h2>{service}</h2>
-        <span className={style.separatorHeader}/>
-      </div>
-      
-      <Tooltip pos="top right" trigger={'hover'} render={tooltipMessage}>
-        <div className={style.field}>
-            <Link href={url} target="_blank">
-              <span className={style.link}>
-                <span>{url}</span>
-                <span className={style.separatorField}/>
-              </span>
-            </Link>
-        </div>
-      </Tooltip>
+            <div className={style.header}>
+                <h2>{service}</h2>
+                <span className={style.separatorHeader} />
+            </div>
 
-      <textarea className={style.description} defaultValue={description} disabled={true}/>
+            <Tooltip pos="top right" trigger={'hover'} render={tooltipMessage}>
+                <div className={style.field}>
+                    <Link href={url} target="_blank">
+                        <span className={style.link}>
+                            <span>{url}</span>
+                            <span className={style.separatorField} />
+                        </span>
+                    </Link>
+                </div>
+            </Tooltip>
 
-      {visiblePopupCreate ? (
-        <Popup {...editParams} close={closePopup} showSpinner={showSpinner} />
-      ) : null}
-      {warningPopup ? (
-        <WarningPopup
-          id={id}
-          close={closeWarningPopup}
-          delete={deleteService}
-        />
-      ) : null}
+            <textarea className={style.description} defaultValue={description} disabled={true}/>
+
+            {visiblePopupCreate ? (
+                <Popup {...editParams} close={closePopup} showSpinner={showSpinner} />
+            ) : null}
+            {warningPopup ? (
+                <WarningPopup
+                id={id}
+                close={closeWarningPopup}
+                delete={deleteService}
+                />
+            ) : null}
     </div>
   );
 };
