@@ -1,1 +1,1 @@
-export * from "./CustomSpinner";
+export * from './CustomSpinner';

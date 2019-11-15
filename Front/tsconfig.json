@@ -16,7 +16,8 @@
       "src/*": ["./src/*"],
 
       "@utils/*": ["./src/utils/*"],
-      "@const/*": ["./src/Constants/*"]
+      "@const/*": ["./src/Constants/*"],
+      "@shared/*": ["./src/Components/Shared/*"]
     }
   }
 }

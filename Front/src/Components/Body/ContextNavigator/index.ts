@@ -1,1 +1,1 @@
-export * from "./ContextNavigator";
+export * from './ContextNavigator';
