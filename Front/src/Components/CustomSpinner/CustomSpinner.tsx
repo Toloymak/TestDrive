@@ -1,14 +1,14 @@
-import * as React from 'react';
-import Spinner from '@skbkontur/react-ui/Spinner';
+import * as React from "react";
+import Spinner from "@skbkontur/react-ui/Spinner";
 
-import style from './style.module.less';
+import style from "./style.module.less";
 
 export const CustomSpinner: React.FC = () => {
-return (
+  return (
     <span className={style.container}>
-        <span className={style.spinner}>
-            <Spinner type="big" caption={'Что то происходит'} />
-        </span>
+      <span className={style.spinner}>
+        <Spinner type="big" caption={"Что то происходит"} />
+      </span>
     </span>
-)
-}
+  );
+};

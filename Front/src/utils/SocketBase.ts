@@ -1,8 +1,8 @@
-import { HubConnection } from '@aspnet/signalr';
-import * as signalR from '@aspnet/signalr';
+import { HubConnection } from "@aspnet/signalr";
+import * as signalR from "@aspnet/signalr";
 
-import {SocketHubs, SocketsAction} from 'src/enums';
-import {SOCKETS_PORT} from 'src/Constants';
+import { SocketHubs, SocketsAction } from "src/enums";
+import { SOCKETS_PORT } from "src/Constants";
 
 export class SocketBase {
   private readonly _url: string;
@@ -25,12 +25,12 @@ export class SocketBase {
       .then(data => console.log(data))
       .catch(err => console.error(err.toString()));
   }
-  
+
   public getData(setAllServices) {
     this._socket.on(SocketsAction.get, allServices => {
-    setAllServices(allServices);
-  });
-}
+      setAllServices(allServices);
+    });
+  }
 
   public create<T>(params: T): void {
     this._socket.invoke(SocketsAction.create, params);

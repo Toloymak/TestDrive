@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --config webpack/webpack.dev.config.js --progress --profile --display-error-details --mode development",
-    "build": "webpack --config webpack/webpack.prod.config.js --progress --profile --display-error-details --mode production"
+    "build": "webpack --config webpack/webpack.prod.config.js --progress --profile --display-error-details --mode production",
+    "eslint-ts": "eslint --fix src/**/*.ts?(x)"
   },
   "dependencies": {
     "@aspnet/signalr": "^1.1.4",

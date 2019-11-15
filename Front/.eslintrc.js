@@ -21,8 +21,7 @@ module.exports = {
             jsx: true
         },
         ecmaVersion: 2019,
-        sourceType: 'module',
-        project: 'tsconfig.json'
+        sourceType: 'module'
     },
     plugins: ['prettier', 'react', 'react-hooks', '@typescript-eslint', 'promise', 'import'],
     settings: {
@@ -45,7 +44,7 @@ module.exports = {
         'prettier/prettier': 'error',
         'react/prop-types': 'off',
         'react-hooks/rules-of-hooks': 'error',
-        'react-hooks/exhaustive-deps': 'warn',
+        '@typescript-eslint/camelcase': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/array-type': 'warn',
         '@typescript-eslint/explicit-member-accessibility': [
@@ -56,7 +55,14 @@ module.exports = {
                 }
             }
         ],
-        '@typescript-eslint/prefer-for-of': 'warn',
+        "@typescript-eslint/no-empty-interface": [
+            "error",
+            {
+                "allowSingleExtends": true
+            }
+        ],
+        '@typescript-eslint/no-use-before-define': ['error', {'functions': false, 'classes': true}],
+        '@typescript-eslint/prefer-for-of': 'off',
         '@typescript-eslint/prefer-function-type': 'warn',
         'no-trailing-spaces': 'warn',
         'prefer-const': 'warn',
@@ -66,7 +72,6 @@ module.exports = {
         'no-var': 'warn',
         'prefer-object-spread': 'warn',
         'prefer-template': 'warn',
-
         radix: 'warn',
         yoda: 'warn'
     }

@@ -1,26 +1,24 @@
 import * as React from "react";
 
-import { AllContextModel } from '../Content';
-import { Cell } from "./Cell";
+import { AllContextModel } from "../Content";
 import style from "./Body.module.less";
-import { ContextNavigator } from './ContextNavigator';
-import { Context } from './Context';
+import { ContextNavigator } from "./ContextNavigator";
+import { Context } from "./Context";
 
 interface BodyProps {
-    allContext: AllContextModel[];
+  allContext: AllContextModel[];
 }
 
-export const Body: React.FC<BodyProps> = ({allContext}) => {
-    const { content, container } = style;
-    return (
+export const Body: React.FC<BodyProps> = ({ allContext }) => {
+  const { content, container } = style;
+  return (
     <div className={content}>
-        <ContextNavigator />
-        <div className={container}>
-        {
-        allContext.map(item => (
-            <Context {...item} key={item.id} />
+      <ContextNavigator />
+      <div className={container}>
+        {allContext.map(item => (
+          <Context {...item} key={item.id} />
         ))}
-        </div>
+      </div>
     </div>
-    );
-}
+  );
+};
