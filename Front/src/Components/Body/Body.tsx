@@ -1,24 +1,24 @@
 import * as React from "react";
 
-import { ContextModel } from '../Content';
+import { AllContextModel } from '../Content';
 import { Cell } from "./Cell";
 import style from "./Body.module.less";
 import { ContextNavigator } from './ContextNavigator';
+import { Context } from './Context';
 
 interface BodyProps {
-    allServices: ContextModel[];
-    showSpinner(): void;
-    delLink(id: string): void;
+    allContext: AllContextModel[];
 }
 
-export const Body: React.FC<BodyProps> = ({allServices, showSpinner, delLink}) => {
+export const Body: React.FC<BodyProps> = ({allContext}) => {
     const { content, container } = style;
     return (
-    <div className={style.content}>
+    <div className={content}>
         <ContextNavigator />
         <div className={container}>
-        {allServices.map((item, index) => (
-            <Cell {...item} key={index} showSpinner={showSpinner} delLink={delLink}/>
+        {
+        allContext.map(item => (
+            <Context {...item} key={item.id} />
         ))}
         </div>
     </div>

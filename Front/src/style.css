@@ -16,35 +16,3 @@ h2 {
 .activeElm {
   cursor: pointer;
 }
-
-.spinner {
-  position: fixed;
-  z-index: 10;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.spinner:before {
-  display: block;
-  content: ' ';
-  position: absolute;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-}
-
-.block-spinner {
-  height: 100px;
-  width: 100px;
-  position: absolute;
-  z-index: 900;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-}

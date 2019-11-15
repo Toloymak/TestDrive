@@ -3,11 +3,11 @@ import Link from '@skbkontur/react-ui/components/Link';
 import React, { useState } from 'react';
 import { LinkModel } from 'src/Components/Content';
 import {Popup} from 'src/Components/Popup/Popup';
-import {WarningPopup} from 'src/Components/Popup/WarningPopup/WarningPopup';
 
 import { MenuItem } from "./Menu/MenuItem";
 import style from "./Cell.module.less";
 import Tooltip from '@skbkontur/react-ui/Tooltip';
+import { WarningPopup } from 'src/Components/Popup/WarningPopup/WarningPopup';
 
 interface CellsProps {
     showSpinner(): void;
@@ -113,9 +113,9 @@ export const Cell: React.FC<Partial<CellsProps>> = ({ id, url, service, descript
                 <WarningPopup
                 id={id}
                 close={closeWarningPopup}
-                delete={deleteService}
+                deleteService={deleteService}
                 />
             ) : null}
-    </div>
-  );
+        </div>
+    );
 };
