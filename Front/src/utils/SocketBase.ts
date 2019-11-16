@@ -1,4 +1,6 @@
+// eslint-disable-next-line import/no-duplicates
 import { HubConnection } from '@aspnet/signalr';
+// eslint-disable-next-line import/no-duplicates
 import * as signalR from '@aspnet/signalr';
 
 import { SocketHubs, SocketsAction } from 'src/enums';
