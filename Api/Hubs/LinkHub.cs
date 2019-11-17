@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace Api.Hubs
 {
-    public class LinkHub: Hub
+    public class LinkHub: BaseHub
     {
         private readonly LinkReader linkReader;
         private readonly LinkWriter linkWriter;

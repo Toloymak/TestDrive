@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace Api.Hubs
 {
-    public class FrontLinkHub: Hub
+    public class FrontLinkHub: BaseHub
     {
         private readonly LinkReader linkReader;
         private readonly FrontManager frontManager;
