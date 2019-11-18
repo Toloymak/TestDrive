@@ -5,6 +5,7 @@ import * as signalR from '@aspnet/signalr';
 
 import { SocketHubs, SocketsAction } from 'src/enums';
 import { SOCKETS_PORT } from 'src/Constants';
+import { LinkModel } from 'src/Components/Content';
 
 export class SocketBase {
     private readonly _url: string;
@@ -34,11 +35,11 @@ export class SocketBase {
         });
     }
 
-    public create<T>(params: T): void {
+    public create(params: Partial<LinkModel>): void {
         this._socket.invoke(SocketsAction.create, params);
     }
 
-    public edit<T>(params: T): void {
+    public edit(params: Partial<LinkModel>): void {
         this._socket.invoke(SocketsAction.update, params);
     }
 

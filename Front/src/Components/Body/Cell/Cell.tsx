@@ -10,19 +10,7 @@ import { WarningPopup } from 'src/Components/Popup/WarningPopup/WarningPopup';
 import { MenuItem } from './Menu/MenuItem';
 import style from './Cell.module.less';
 
-interface CellsProps {
-    showSpinner(): void;
-    id: string;
-    name: string;
-    priority: number;
-    links: LinkModel[];
-    url: string;
-    service: string;
-    description: string;
-    delLink(id: string): void;
-}
-
-export const Cell: React.FC<Partial<CellsProps>> = ({ id, url, service, description, showSpinner, delLink }) => {
+export const Cell: React.FC<Partial<LinkModel>> = ({ id, url, description }) => {
     const [showMenu, setShowMenu] = useState(false);
     const [visiblePopupCreate, setVisiblePopupCreate] = useState(false);
     const [warningPopup, setWarningPopup] = useState(false);
@@ -56,19 +44,11 @@ export const Cell: React.FC<Partial<CellsProps>> = ({ id, url, service, descript
         showMenu ? closeMenu() : openMenu();
     };
 
-    const deleteService = (id): void => {
-        showSpinner();
-        delLink(id);
-    };
-
     const editParams = {
         editMode: true,
         id,
         url,
-        service,
-        description,
-        showSpinner,
-        delLink
+        description
     };
 
     const tooltipMessage = () => <span>{url}</span>;
@@ -90,7 +70,7 @@ export const Cell: React.FC<Partial<CellsProps>> = ({ id, url, service, descript
             </div>
 
             <div className={style.header}>
-                <h2>{service}</h2>
+                <h2>{'хуервис'}</h2>
                 <span className={style.separatorHeader} />
             </div>
 
@@ -107,8 +87,8 @@ export const Cell: React.FC<Partial<CellsProps>> = ({ id, url, service, descript
 
             <textarea className={style.description} defaultValue={description} disabled={true} />
 
-            {visiblePopupCreate ? <Popup {...editParams} close={closePopup} showSpinner={showSpinner} /> : null}
-            {warningPopup ? <WarningPopup id={id} close={closeWarningPopup} deleteService={deleteService} /> : null}
+            {visiblePopupCreate ? <Popup {...editParams} close={closePopup} /> : null}
+            {warningPopup ? <WarningPopup id={id} close={closeWarningPopup} /> : null}
         </div>
     );
 };

@@ -1,28 +1,29 @@
-import * as React from 'react';
+import React, { useContext, useEffect } from 'react';
 import Icon from '@skbkontur/react-icons';
 import Button from '@skbkontur/react-ui/components/Button/Button';
 
-import { LinkModel } from '../Content';
+import { ServiceActions } from 'src/enums/ServiceActions';
+
+import { EditableDataContext, LinkModel } from '../Content';
 
 import './Popup.css';
 
 interface Props extends LinkModel {
     close(): void;
-    showSpinner(): void;
     editMode: boolean;
-    service: string;
 }
 
-export const Popup: React.FC<Partial<Props>> = ({ id, close, showSpinner, url, service, editMode, description }) => {
+export const Popup: React.FC<Partial<Props>> = ({ id = null, close, url, editMode, description }) => {
     const refsElements = React.useRef({
         urlRef: null,
         serviceRef: null,
         textareaRef: null
     });
+    const { serviceControl } = useContext(EditableDataContext);
 
     const useButton = React.useMemo(() => (editMode ? 'success' : 'primary'), [editMode]);
 
-    React.useEffect(
+    useEffect(
         () => {
             document.addEventListener('mouseup', event => {
                 const element = document.querySelector('.popup-content');
@@ -35,8 +36,7 @@ export const Popup: React.FC<Partial<Props>> = ({ id, close, showSpinner, url, s
     );
 
     const field = (name, mode = 'input') => {
-        const defaultValue = editMode ? (name === 'URL' ? url : service) : '';
-
+        const defaultValue = editMode ? (name === 'URL' ? url : 'хуервис') : '';
         const placeholder = name === 'URL' ? 'domain:port' : 'Введите название сервиса';
         return (
             <div className="popup_blockField">
@@ -65,14 +65,25 @@ export const Popup: React.FC<Partial<Props>> = ({ id, close, showSpinner, url, s
         );
     };
 
+    const createLink = (linkData: LinkModel): void => {
+        serviceControl(ServiceActions.create, linkData);
+    };
+
+    const editLink = (linkData: LinkModel): void => {
+        serviceControl(ServiceActions.edit, linkData);
+    };
+
     const addAndUpdateService = () => {
-        showSpinner();
-        // const method = editMode ? SOCKETS.UPDATE_DATA : SOCKETS.CREATE_DATA;
         const url = refsElements.current.urlRef.value;
-        const service = refsElements.current.serviceRef.value;
+        const title = refsElements.current.urlRef.value;
+        const priority = 0;
+        const blockId = '3fa85f64-5717-4562-b3fc-2c963f66afa6';
         const description = refsElements.current.textareaRef.value;
-        const idLink = id !== undefined ? id : null;
-        // addAndUpdate(method, { idLink, url, service, description });
+        // const service = refsElements.current.serviceRef.value;
+
+        editMode
+            ? editLink({ id, url, title, description, priority, blockId })
+            : createLink({ url, title, description, priority, blockId });
         close();
     };
 

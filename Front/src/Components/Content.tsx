@@ -1,17 +1,18 @@
 import React, { useState, useEffect, useMemo } from 'react';
 
 import { createSocket, SocketModel } from 'src/utils';
+import { ServiceActions } from 'src/enums/ServiceActions';
 
 import { Body } from './Body';
 import { Header } from './Header';
 import { CustomSpinner } from './CustomSpinner';
 
-export interface AllContextModel extends BlockModel {
+export interface BlockModelWithLinks extends BlockModel {
     links: LinkModel[];
 }
 
 export interface LinkModel {
-    id: string;
+    id?: string;
     url: string;
     title: string;
     priority: number;
@@ -19,7 +20,7 @@ export interface LinkModel {
     description: string;
 }
 
-interface BlockModel {
+export interface BlockModel {
     id: string;
     name: string;
     priority: number;
@@ -28,9 +29,10 @@ interface BlockModel {
 interface InformationModel {
     showSpinner(): void;
     hideSpinner(): void;
+    serviceControl(action: ServiceActions, data: string | LinkModel): void;
 }
 
-export const InformationContext = React.createContext<InformationModel>({} as InformationModel);
+export const EditableDataContext = React.createContext<InformationModel>({} as InformationModel);
 export const SocketContext = React.createContext<SocketModel>({} as SocketModel);
 
 export const Content: React.FC = () => {
@@ -38,15 +40,6 @@ export const Content: React.FC = () => {
 
     const [allContext, setAllContext] = useState([]);
     const [showedSpinner, setShowedSpinner] = useState(true);
-
-    useEffect(
-        (): void => {
-            setShowedSpinner(true);
-            SOCKETS.links.getData(setAllContext);
-            setShowedSpinner(false);
-        },
-        [SOCKETS.links]
-    );
 
     const showSpinner = (): void => {
         setShowedSpinner(true);
@@ -56,25 +49,37 @@ export const Content: React.FC = () => {
         setShowedSpinner(false);
     };
 
-    const delContext = (id: string): void => {
-        const filteredLink = allContext.filter(item => item.id !== id);
-        setAllContext(filteredLink);
-        SOCKETS.blocks.delete(id);
+    useEffect((): void => {
+        setShowedSpinner(true);
+        SOCKETS.links.getData(setAllContext);
         setShowedSpinner(false);
+    }, []);
+
+    const serviceControl = (action: ServiceActions, data: string | LinkModel) => {
+        if (action === ServiceActions.del) {
+            SOCKETS.links.delete(data as string);
+        }
+        if (action === ServiceActions.edit) {
+            SOCKETS.links.edit(data as LinkModel);
+        }
+        if (action === ServiceActions.create) {
+            SOCKETS.links.create(data as LinkModel);
+        }
     };
 
-    const information = {
+    const editableData = {
         showSpinner,
-        hideSpinner
+        hideSpinner,
+        serviceControl
     };
 
     return (
         <SocketContext.Provider value={SOCKETS}>
-            <Header showSpinner={showSpinner} />
-            <InformationContext.Provider value={information}>
+            <EditableDataContext.Provider value={editableData}>
+                <Header />
                 <Body allContext={allContext} />
                 {showedSpinner && <CustomSpinner />}
-            </InformationContext.Provider>
+            </EditableDataContext.Provider>
         </SocketContext.Provider>
     );
 };

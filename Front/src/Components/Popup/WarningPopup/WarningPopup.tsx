@@ -1,15 +1,19 @@
-import * as React from 'react';
+import React, { useContext, useEffect } from 'react';
 import Button from '@skbkontur/react-ui/components/Button/Button';
 
 import './PopupWarning.css';
+
+import { EditableDataContext } from 'src/Components/Content';
+import { ServiceActions } from 'src/enums/ServiceActions';
 interface Props {
     id: string;
     close(): void;
-    deleteService(id: string): void;
 }
 
-export const WarningPopup: React.FC<Props> = ({ id, close, deleteService }) => {
-    React.useEffect(
+export const WarningPopup: React.FC<Props> = ({ id, close }) => {
+    const { serviceControl } = useContext(EditableDataContext);
+
+    useEffect(
         () => {
             document.addEventListener('mouseup', event => {
                 const element = document.querySelector('.popupWarning-content');
@@ -23,7 +27,7 @@ export const WarningPopup: React.FC<Props> = ({ id, close, deleteService }) => {
 
     const delService = (): void => {
         close();
-        deleteService(id);
+        serviceControl(ServiceActions.del, id);
     };
 
     return (

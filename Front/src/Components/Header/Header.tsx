@@ -8,11 +8,7 @@ import { TestSocket } from './Secret/TestSockets';
 
 import './Header.less';
 
-interface Props {
-    showSpinner(): void;
-}
-
-export const Header: React.FC<Props> = ({ showSpinner }) => {
+export const Header: React.FC = () => {
     const [visiblePopupCreate, setVisiblePopupCreate] = useState(false);
     const [visibleListTestSocket, setVisibleListTestSocket] = useState(false);
 
@@ -48,7 +44,7 @@ export const Header: React.FC<Props> = ({ showSpinner }) => {
                 <Button onClick={openPopup} use="primary" size="medium" width="250px">
                     Добавить сервис
                 </Button>
-                {visiblePopupCreate ? <Popup close={closePopup} showSpinner={showSpinner} /> : null}
+                {visiblePopupCreate ? <Popup close={closePopup} /> : null}
             </div>
             {visibleListTestSocket && <TestSocket toggleVisibleListTestSocket={toggleVisibleListTestSocket} />}
         </div>
