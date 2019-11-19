@@ -85,7 +85,7 @@ export const Cell: React.FC<Partial<LinkModel>> = ({ id, url, description }) => 
                 </div>
             </Tooltip>
 
-            <textarea className={style.description} defaultValue={description} disabled={true} />
+            <textarea className={style.description} value={description} disabled={true} />
 
             {visiblePopupCreate ? <CreateOrEditMenu {...editParams} close={closePopup} /> : null}
             {warningPopup ? <DeleteConfirmedPopup id={id} close={closeWarningPopup} /> : null}
