@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import * as ReactDOM from "react-dom";
+import React, { Component } from 'react';
+import * as ReactDOM from 'react-dom';
 
-import { Content } from "./Components/Content";
+import { Content } from './Components/Content';
 
-ReactDOM.render(<Content />, document.querySelector("#content"));
+ReactDOM.render(<Content />, document.querySelector('#content'));

@@ -7,6 +7,8 @@ import { Body } from './Body';
 import { Header } from './Header';
 import { CustomSpinner } from './CustomSpinner';
 
+import './style.less';
+
 export interface BlockModelWithLinks extends BlockModel {
     links: LinkModel[];
 }
