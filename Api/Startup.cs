@@ -67,15 +67,16 @@ namespace Api
             {
                 // todo: Сделать тут нормально
                 builder.WithOrigins(
-                "http://localhost",
-                "http://vm-lastmile/",
-                "https://vm-lastmile/",
-                "https://vm-lastmile.kontur/",
-                "http://vm-lastmile.kontur/"
+                "http://localhost:9000",
+                "http://localhost:9010",
+                "http://vm-lastmile",
+                "https://vm-lastmile",
+                "https://vm-lastmile.kontur",
+                "http://vm-lastmile.kontur"
                 )
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowCredentials();
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
             });
             app.UseRouting();
             app.UseEndpoints(endpoints =>
