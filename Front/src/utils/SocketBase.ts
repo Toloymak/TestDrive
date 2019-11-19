@@ -4,7 +4,6 @@ import { HubConnection } from '@aspnet/signalr';
 import * as signalR from '@aspnet/signalr';
 
 import { SocketHubs, SocketsAction } from 'src/enums';
-import { SOCKETS_PORT } from 'src/Constants';
 import { LinkModel } from 'src/Components/Content';
 
 export class SocketBase {
@@ -12,7 +11,9 @@ export class SocketBase {
     private readonly _socket: HubConnection;
 
     constructor(hub: SocketHubs) {
-        this._url = `http://localhost:${SOCKETS_PORT}/${hub}`;
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        // @ts-ignore
+        this._url = `http://${SOCKETS_HOSTNAME}:${SOCKETS_PORT}/${hub}`;
         this._socket = this.newConnect(this._url);
 
         this.init();

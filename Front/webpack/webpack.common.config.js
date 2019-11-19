@@ -1,3 +1,5 @@
+const SOCKETS = require("./socketsConst");
+const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 
@@ -137,7 +139,11 @@ module.exports = isDev => {
         filename: 'main.css',
         ignoreOrder: true
       }),
-      new CaseSensitivePathsPlugin()
+      new CaseSensitivePathsPlugin(),
+      new webpack.DefinePlugin({
+        SOCKETS_PORT: JSON.stringify(isDev ? SOCKETS.PORT_DEV : SOCKETS.PORT_PROD),
+        SOCKETS_HOSTNAME: JSON.stringify(isDev ? SOCKETS.HOSTNAME_DEV : SOCKETS.HOSTNAME_PROD)
+      })
     ]
   };
 };
