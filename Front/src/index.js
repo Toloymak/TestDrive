@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import { Content } from './Components/Content';

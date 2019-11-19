@@ -127,7 +127,7 @@ module.exports = isDev => {
           loader: "url-loader"
         },
         {
-          test: /\.(png|svg|jpg|gif)$/,
+          test: /\.(png|svg|jpg|ico|gif)$/,
           use: ["file-loader"]
         }
       ]

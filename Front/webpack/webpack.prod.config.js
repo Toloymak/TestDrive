@@ -37,6 +37,7 @@ module.exports = (env, args) => webpackMerge(commonConfig(args.mode === 'develop
       new HtmlWebpackPlugin({
           title: 'TestDrive',
           filename: 'index.html',
+          favicon: 'src/static/favicon.ico',
           files: {
               css: ["main.css"],
               js: ["main.js"]

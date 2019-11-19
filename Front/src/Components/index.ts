@@ -1,1 +1,1 @@
-import * from './Content';
+export * from './Content';
