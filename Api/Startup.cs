@@ -65,7 +65,13 @@ namespace Api
 
             app.UseCors(builder =>
             {
-                builder.WithOrigins("http://localhost:9000")
+                // todo: Сделать тут нормально
+                builder.WithOrigins("http://localhost:5010")
+                    .WithOrigins("http://localhost:9000")
+                    .WithOrigins("http://vm-lastmile/")
+                    .WithOrigins("https://vm-lastmile/")
+                    .WithOrigins("https://vm-lastmile.kontur/")
+                    .WithOrigins("http://vm-lastmile.kontur/")
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials();
