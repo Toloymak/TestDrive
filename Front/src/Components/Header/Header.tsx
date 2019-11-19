@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from '@skbkontur/react-ui/components/Button/Button';
 import Logotype from '@skbkontur/react-ui/components/Logotype/Logotype';
 
-import { Popup } from '../Popup/Popup';
+import { CreateOrEditMenu } from '../CreateOrEditMenu/CreateOrEditMenu';
 
 import { TestSocket } from './Secret/TestSockets';
 
@@ -44,7 +44,7 @@ export const Header: React.FC = () => {
                 <Button onClick={openPopup} use="primary" size="medium" width="250px">
                     Добавить сервис
                 </Button>
-                {visiblePopupCreate ? <Popup close={closePopup} /> : null}
+                {visiblePopupCreate ? <CreateOrEditMenu close={closePopup} /> : null}
             </div>
             {visibleListTestSocket && <TestSocket toggleVisibleListTestSocket={toggleVisibleListTestSocket} />}
         </div>

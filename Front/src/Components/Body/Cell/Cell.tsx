@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import Tooltip from '@skbkontur/react-ui/Tooltip';
 
 import { LinkModel } from 'src/Components/Content';
-import { Popup } from 'src/Components/Popup/Popup';
-import { WarningPopup } from 'src/Components/Popup/WarningPopup/WarningPopup';
+import { CreateOrEditMenu } from 'src/Components/CreateOrEditMenu/CreateOrEditMenu';
+import { DeleteConfirmedPopup } from 'src/Components/CreateOrEditMenu/DeleteConfirmedPopup/DeleteConfirmedPopup';
 
 import { MenuItem } from './Menu/MenuItem';
 import style from './Cell.module.less';
@@ -87,8 +87,8 @@ export const Cell: React.FC<Partial<LinkModel>> = ({ id, url, description }) => 
 
             <textarea className={style.description} defaultValue={description} disabled={true} />
 
-            {visiblePopupCreate ? <Popup {...editParams} close={closePopup} /> : null}
-            {warningPopup ? <WarningPopup id={id} close={closeWarningPopup} /> : null}
+            {visiblePopupCreate ? <CreateOrEditMenu {...editParams} close={closePopup} /> : null}
+            {warningPopup ? <DeleteConfirmedPopup id={id} close={closeWarningPopup} /> : null}
         </div>
     );
 };

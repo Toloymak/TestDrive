@@ -6,14 +6,14 @@ import { ServiceActions } from 'src/enums/ServiceActions';
 
 import { EditableDataContext, LinkModel } from '../Content';
 
-import './Popup.css';
+import './CreateOrEditMenu.css';
 
 interface Props extends LinkModel {
     close(): void;
     editMode: boolean;
 }
 
-export const Popup: React.FC<Partial<Props>> = ({ id = null, close, url, editMode, description }) => {
+export const CreateOrEditMenu: React.FC<Partial<Props>> = ({ id = null, close, url, editMode, description }) => {
     const refsElements = React.useRef({
         urlRef: null,
         serviceRef: null,

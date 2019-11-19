@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import Button from '@skbkontur/react-ui/components/Button/Button';
 
-import './PopupWarning.css';
+import './DeleteConfirmedPopup.css';
 
 import { EditableDataContext } from 'src/Components/Content';
 import { ServiceActions } from 'src/enums/ServiceActions';
@@ -10,7 +10,7 @@ interface Props {
     close(): void;
 }
 
-export const WarningPopup: React.FC<Props> = ({ id, close }) => {
+export const DeleteConfirmedPopup: React.FC<Props> = ({ id, close }) => {
     const { serviceControl } = useContext(EditableDataContext);
 
     useEffect(
