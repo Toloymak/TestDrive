@@ -32,16 +32,12 @@ export const CreateOrEditMenu: React.FC<Partial<Props>> = ({
 
     const useButton = React.useMemo(() => (editMode ? 'success' : 'primary'), [editMode]);
 
-    const { allBlocks } = useContext(DataContext);
-    const blocks = useMemo(
-        () =>
-            allBlocks.map(item => {
-                return { id: item.id, name: item.name };
-            }),
-        [...allBlocks]
-    );
+    const { allBlocks, currentIdBlock } = useContext(DataContext);
+    const blocks = allBlocks.map(item => {
+        return { id: item.id, name: item.name };
+    });
 
-    const [currentService, setCurrentService] = useState(blockId);
+    const [currentService, setCurrentService] = useState(currentIdBlock);
 
     useEffect(
         () => {
@@ -93,7 +89,7 @@ export const CreateOrEditMenu: React.FC<Partial<Props>> = ({
         return (
             <div className="popup_blockField">
                 <span className="popup_nameField">{'Сервис'}</span>
-                <select className="popup_field" onChange={serviceOnChange} defaultValue={currentService}>
+                <select className="popup_field" onChange={serviceOnChange} defaultValue={currentIdBlock}>
                     {blocks.map(item => (
                         <option value={item.id} key={item.id}>
                             {item.name}

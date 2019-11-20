@@ -57,7 +57,7 @@ export const Cell: React.FC<Partial<Props>> = ({ id, url, description, title, se
         title
     };
 
-    const tooltipMessage = () => <span>{title}</span>;
+    const tooltipMessage = () => <span>{url}</span>;
 
     return (
         <div className={style.cell}>
@@ -76,7 +76,7 @@ export const Cell: React.FC<Partial<Props>> = ({ id, url, description, title, se
             </div>
 
             <div className={style.header}>
-                <h2>{serviceName}</h2>
+                <h2>{title}</h2>
                 <span className={style.separatorHeader} />
             </div>
 

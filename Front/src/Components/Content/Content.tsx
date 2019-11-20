@@ -34,6 +34,7 @@ interface InformationModel {
     hideSpinner(): void;
     serviceControl(action: ServiceActions, data: string | LinkModel): void;
     allBlocks: BlockModel[];
+    currentIdBlock: string;
 }
 
 export const SocketContext = React.createContext<SocketModel>({} as SocketModel);
@@ -45,6 +46,7 @@ export const Content: React.FC = () => {
     const [allContext, setAllContext] = useState([]);
     const [allBlocks, setAllBlocks] = useState([]);
     const [counterNavigation, setCounterNavigation] = useState(0);
+    const [currentIdBlock, setCurrentIdBlock] = useState('');
 
     const [showedSpinner, setShowedSpinner] = useState(true);
 
@@ -70,6 +72,7 @@ export const Content: React.FC = () => {
     const selectOtherBlock = (action: Navigator): void => {
         const nextBLock = counterNavi(action, counterNavigation, allBlocks.length);
         setCounterNavigation(nextBLock);
+        setCurrentIdBlock(allBlocks[nextBLock].id);
     };
 
     const serviceControl = (action: ServiceActions, data: string | LinkModel) => {
@@ -88,7 +91,8 @@ export const Content: React.FC = () => {
         showSpinner,
         hideSpinner,
         serviceControl,
-        allBlocks
+        allBlocks,
+        currentIdBlock
     };
 
     return (

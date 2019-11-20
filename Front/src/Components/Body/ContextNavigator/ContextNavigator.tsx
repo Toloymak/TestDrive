@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { classContainer, className } from 'src/Components/Body/ContextNavigator/utils/ClassesElements';
+import { classContainer, className, classNavi } from 'src/Components/Body/ContextNavigator/utils/ClassesElements';
 import { Navigator } from 'src/Components/Content/utils';
 
 interface Props {
@@ -21,9 +21,13 @@ export const ContextNavigator: React.FC<Props> = ({ serviceName, selectOtherBloc
 
     return (
         <div className={classContainer}>
-            <span onClick={next}>Вправо</span>
+            <span className={classNavi} onClick={next}>
+                Вправо
+            </span>
             <span className={className}>{serviceName}</span>
-            <span onClick={preview}>Влево</span>
+            <span className={classNavi} onClick={preview}>
+                Влево
+            </span>
         </div>
     );
 };
