@@ -3,14 +3,18 @@ import Link from '@skbkontur/react-ui/components/Link';
 import React, { useState } from 'react';
 import Tooltip from '@skbkontur/react-ui/Tooltip';
 
-import { LinkModel } from 'src/Components/Content';
+import { LinkModel } from 'src/Components/Content/Content';
 import { CreateOrEditMenu } from 'src/Components/CreateOrEditMenu/CreateOrEditMenu';
 import { DeleteConfirmedPopup } from 'src/Components/CreateOrEditMenu/DeleteConfirmedPopup/DeleteConfirmedPopup';
 
 import { MenuItem } from './Menu/MenuItem';
 import style from './Cell.module.less';
 
-export const Cell: React.FC<Partial<LinkModel>> = ({ id, url, description }) => {
+interface Props extends LinkModel {
+    serviceName: string;
+}
+
+export const Cell: React.FC<Partial<Props>> = ({ id, url, description, title, serviceName, blockId }) => {
     const [showMenu, setShowMenu] = useState(false);
     const [visiblePopupCreate, setVisiblePopupCreate] = useState(false);
     const [warningPopup, setWarningPopup] = useState(false);
@@ -48,10 +52,12 @@ export const Cell: React.FC<Partial<LinkModel>> = ({ id, url, description }) => 
         editMode: true,
         id,
         url,
-        description
+        description,
+        blockId,
+        title
     };
 
-    const tooltipMessage = () => <span>{url}</span>;
+    const tooltipMessage = () => <span>{title}</span>;
 
     return (
         <div className={style.cell}>
@@ -70,11 +76,11 @@ export const Cell: React.FC<Partial<LinkModel>> = ({ id, url, description }) => 
             </div>
 
             <div className={style.header}>
-                <h2>{'хуервис'}</h2>
+                <h2>{serviceName}</h2>
                 <span className={style.separatorHeader} />
             </div>
 
-            <Tooltip pos="top right" trigger={'hover'} render={tooltipMessage}>
+            <Tooltip pos="bottom right" trigger={'hover'} render={tooltipMessage}>
                 <div className={style.field}>
                     <Link href={url} target="_blank">
                         <span className={style.link}>

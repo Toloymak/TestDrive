@@ -3,7 +3,7 @@ import Button from '@skbkontur/react-ui/components/Button/Button';
 
 import './DeleteConfirmedPopup.css';
 
-import { EditableDataContext } from 'src/Components/Content';
+import { DataContext } from 'src/Components/Content/Content';
 import { ServiceActions } from 'src/enums/ServiceActions';
 interface Props {
     id: string;
@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const DeleteConfirmedPopup: React.FC<Props> = ({ id, close }) => {
-    const { serviceControl } = useContext(EditableDataContext);
+    const { serviceControl } = useContext(DataContext);
 
     useEffect(
         () => {

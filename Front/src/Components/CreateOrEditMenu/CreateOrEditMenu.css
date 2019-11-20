@@ -22,7 +22,7 @@
 
 .popup-content {
 	width: 778px;
-	height: 566px;
+	height: 630px;
 	position: absolute;
 	z-index: 90;
 	top: 0;
@@ -57,10 +57,20 @@
 	margin-top: 37px;
 }
 
+.popup_bodyRight {
+	display: flex;
+	justify-content: flex-end;
+	margin: 0 6px 10px 0;
+}
+
+.popup_bodyRight>div {
+	padding-right: 0;
+}
+
 .popup_bodyRow {
 	display: flex;
 	justify-content: flex-start;
-	margin-bottom: 42px;
+	margin-bottom: 15px;
 }
 
 .popup_blockField {

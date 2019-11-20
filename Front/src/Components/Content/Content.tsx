@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { createSocket, SocketModel } from 'src/utils';
 import { ServiceActions } from 'src/enums/ServiceActions';
+import { counterNavi, Navigator } from 'src/Components/Content/utils';
 
-import { Body } from './Body';
-import { Header } from './Header';
-import { CustomSpinner } from './CustomSpinner';
+import { Body } from '../Body';
+import { Header } from '../Header';
+import { CustomSpinner } from '../CustomSpinner';
 
 import './style.less';
 
@@ -34,14 +35,28 @@ interface InformationModel {
     serviceControl(action: ServiceActions, data: string | LinkModel): void;
 }
 
-export const EditableDataContext = React.createContext<InformationModel>({} as InformationModel);
 export const SocketContext = React.createContext<SocketModel>({} as SocketModel);
+export const DataContext = React.createContext<InformationModel>({} as InformationModel);
 
 export const Content: React.FC = () => {
     const SOCKETS = useMemo(() => createSocket(), []);
 
     const [allContext, setAllContext] = useState([]);
+    const [allBlocks, setAllBlocks] = useState([]);
+    const [counterNavigation, setCounterNavigation] = useState(0);
+
     const [showedSpinner, setShowedSpinner] = useState(true);
+
+    const setBLocks = (data): void => {
+        setAllBlocks(data);
+    };
+
+    useEffect((): void => {
+        setShowedSpinner(true);
+        SOCKETS.blocks.getData(setBLocks);
+        SOCKETS.links.getData(setAllContext);
+        setShowedSpinner(false);
+    }, []);
 
     const showSpinner = (): void => {
         setShowedSpinner(true);
@@ -51,11 +66,10 @@ export const Content: React.FC = () => {
         setShowedSpinner(false);
     };
 
-    useEffect((): void => {
-        setShowedSpinner(true);
-        SOCKETS.links.getData(setAllContext);
-        setShowedSpinner(false);
-    }, []);
+    const selectOtherBlock = (action: Navigator): void => {
+        const nextBLock = counterNavi(action, counterNavigation, allBlocks.length);
+        setCounterNavigation(nextBLock);
+    };
 
     const serviceControl = (action: ServiceActions, data: string | LinkModel) => {
         if (action === ServiceActions.del) {
@@ -69,7 +83,7 @@ export const Content: React.FC = () => {
         }
     };
 
-    const editableData = {
+    const data = {
         showSpinner,
         hideSpinner,
         serviceControl
@@ -77,11 +91,19 @@ export const Content: React.FC = () => {
 
     return (
         <SocketContext.Provider value={SOCKETS}>
-            <EditableDataContext.Provider value={editableData}>
+            <DataContext.Provider value={data}>
                 <Header />
-                <Body allContext={allContext} />
+                {allContext.length ? (
+                    <Body
+                        context={allContext[counterNavigation]}
+                        counterNavigation={counterNavigation}
+                        selectOtherBlock={selectOtherBlock}
+                    />
+                ) : (
+                    <CustomSpinner />
+                )}
                 {showedSpinner && <CustomSpinner />}
-            </EditableDataContext.Provider>
+            </DataContext.Provider>
         </SocketContext.Provider>
     );
 };

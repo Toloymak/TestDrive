@@ -4,7 +4,7 @@ import Button from '@skbkontur/react-ui/components/Button/Button';
 
 import { ServiceActions } from 'src/enums/ServiceActions';
 
-import { EditableDataContext, LinkModel } from '../Content';
+import { DataContext, LinkModel } from '../Content/Content';
 
 import './CreateOrEditMenu.css';
 
@@ -13,13 +13,22 @@ interface Props extends LinkModel {
     editMode: boolean;
 }
 
-export const CreateOrEditMenu: React.FC<Partial<Props>> = ({ id = null, close, url, editMode, description }) => {
+export const CreateOrEditMenu: React.FC<Partial<Props>> = ({
+    id = null,
+    close,
+    url,
+    editMode,
+    description,
+    blockId,
+    title
+}) => {
     const refsElements = React.useRef({
         urlRef: null,
+        tittleRef: null,
         serviceRef: null,
         textareaRef: null
     });
-    const { serviceControl } = useContext(EditableDataContext);
+    const { serviceControl } = useContext(DataContext);
 
     const useButton = React.useMemo(() => (editMode ? 'success' : 'primary'), [editMode]);
 
@@ -36,7 +45,7 @@ export const CreateOrEditMenu: React.FC<Partial<Props>> = ({ id = null, close, u
     );
 
     const field = (name, mode = 'input') => {
-        const defaultValue = editMode ? (name === 'URL' ? url : 'хуервис') : '';
+        const defaultValue = editMode ? (name === 'URL' ? url : title) : '';
         const placeholder = name === 'URL' ? 'domain:port' : 'Введите название сервиса';
         return (
             <div className="popup_blockField">
@@ -46,7 +55,7 @@ export const CreateOrEditMenu: React.FC<Partial<Props>> = ({ id = null, close, u
                         ref={field =>
                             name === 'URL'
                                 ? (refsElements.current.urlRef = field)
-                                : (refsElements.current.serviceRef = field)
+                                : (refsElements.current.tittleRef = field)
                         }
                         defaultValue={defaultValue}
                         placeholder={placeholder}
@@ -75,9 +84,8 @@ export const CreateOrEditMenu: React.FC<Partial<Props>> = ({ id = null, close, u
 
     const addAndUpdateService = () => {
         const url = refsElements.current.urlRef.value;
-        const title = refsElements.current.urlRef.value;
+        const title = refsElements.current.tittleRef.value;
         const priority = 0;
-        const blockId = '3fa85f64-5717-4562-b3fc-2c963f66afa6';
         const description = refsElements.current.textareaRef.value;
         // const service = refsElements.current.serviceRef.value;
 
@@ -97,9 +105,10 @@ export const CreateOrEditMenu: React.FC<Partial<Props>> = ({ id = null, close, u
                     </span>
                 </div>
                 <div className="popup_body">
+                    <div className="popup_bodyRight">{field('СЕРВИС')}</div>
                     <div className="popup_bodyRow">
                         {field('URL')}
-                        {field('СЕРВИС')}
+                        {field('ВСПЛЫВАШКА')}
                     </div>
                     {field('ОПИСАНИЕ', 'area')}
                 </div>

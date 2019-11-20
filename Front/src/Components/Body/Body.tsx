@@ -1,6 +1,7 @@
 import React from 'react';
 
 import shared from '@shared/Styles/StylesShared.module.less';
+import { Navigator } from 'src/Components/Content/utils';
 
 import { BlockModelWithLinks } from '../Content';
 
@@ -9,21 +10,24 @@ import { ContextNavigator } from './ContextNavigator';
 import { Context } from './Context';
 
 interface BodyProps {
-    allContext: BlockModelWithLinks[];
+    context: BlockModelWithLinks;
+    counterNavigation: number;
+    selectOtherBlock(action: Navigator): void;
 }
 
-export const Body: React.FC<BodyProps> = ({ allContext }) => {
+export const Body: React.FC<BodyProps> = ({ context, counterNavigation, selectOtherBlock }) => {
     const { content, container } = style;
     const { flexCenter } = shared;
-
     return (
         <div className={content}>
-            {/*<ContextNavigator />*/}
+            <ContextNavigator
+                counterNavigation={counterNavigation}
+                selectOtherBlock={selectOtherBlock}
+                serviceName={context.name}
+            />
             <div className={flexCenter}>
                 <div className={container}>
-                    {allContext.map(item => (
-                        <Context {...item} key={item.id} />
-                    ))}
+                    <Context {...context} />
                 </div>
             </div>
         </div>

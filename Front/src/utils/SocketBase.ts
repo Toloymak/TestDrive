@@ -4,7 +4,7 @@ import { HubConnection } from '@aspnet/signalr';
 import * as signalR from '@aspnet/signalr';
 
 import { SocketHubs, SocketsAction } from 'src/enums';
-import { LinkModel } from 'src/Components/Content';
+import { LinkModel } from 'src/Components/Content/Content';
 
 export class SocketBase {
     private readonly _url: string;
