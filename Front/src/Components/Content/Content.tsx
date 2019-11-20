@@ -33,6 +33,7 @@ interface InformationModel {
     showSpinner(): void;
     hideSpinner(): void;
     serviceControl(action: ServiceActions, data: string | LinkModel): void;
+    allBlocks: BlockModel[];
 }
 
 export const SocketContext = React.createContext<SocketModel>({} as SocketModel);
@@ -86,7 +87,8 @@ export const Content: React.FC = () => {
     const data = {
         showSpinner,
         hideSpinner,
-        serviceControl
+        serviceControl,
+        allBlocks
     };
 
     return (

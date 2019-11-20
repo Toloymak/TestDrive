@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import Icon from '@skbkontur/react-icons';
 import Button from '@skbkontur/react-ui/components/Button/Button';
 
@@ -32,6 +32,17 @@ export const CreateOrEditMenu: React.FC<Partial<Props>> = ({
 
     const useButton = React.useMemo(() => (editMode ? 'success' : 'primary'), [editMode]);
 
+    const { allBlocks } = useContext(DataContext);
+    const blocks = useMemo(
+        () =>
+            allBlocks.map(item => {
+                return { id: item.id, name: item.name };
+            }),
+        [...allBlocks]
+    );
+
+    const [currentService, setCurrentService] = useState(blockId);
+
     useEffect(
         () => {
             document.addEventListener('mouseup', event => {
@@ -43,6 +54,10 @@ export const CreateOrEditMenu: React.FC<Partial<Props>> = ({
         },
         [close]
     );
+
+    const serviceOnChange = data => {
+        setCurrentService(data.target.value);
+    };
 
     const field = (name, mode = 'input') => {
         const defaultValue = editMode ? (name === 'URL' ? url : title) : '';
@@ -74,6 +89,21 @@ export const CreateOrEditMenu: React.FC<Partial<Props>> = ({
         );
     };
 
+    const service = () => {
+        return (
+            <div className="popup_blockField">
+                <span className="popup_nameField">{'Сервис'}</span>
+                <select className="popup_field" onChange={serviceOnChange} defaultValue={currentService}>
+                    {blocks.map(item => (
+                        <option value={item.id} key={item.id}>
+                            {item.name}
+                        </option>
+                    ))}
+                </select>
+            </div>
+        );
+    };
+
     const createLink = (linkData: LinkModel): void => {
         serviceControl(ServiceActions.create, linkData);
     };
@@ -87,7 +117,7 @@ export const CreateOrEditMenu: React.FC<Partial<Props>> = ({
         const title = refsElements.current.tittleRef.value;
         const priority = 0;
         const description = refsElements.current.textareaRef.value;
-        // const service = refsElements.current.serviceRef.value;
+        const blockId = currentService;
 
         editMode
             ? editLink({ id, url, title, description, priority, blockId })
@@ -105,7 +135,7 @@ export const CreateOrEditMenu: React.FC<Partial<Props>> = ({
                     </span>
                 </div>
                 <div className="popup_body">
-                    <div className="popup_bodyRight">{field('СЕРВИС')}</div>
+                    <div className="popup_bodyRight">{service()}</div>
                     <div className="popup_bodyRow">
                         {field('URL')}
                         {field('ВСПЛЫВАШКА')}

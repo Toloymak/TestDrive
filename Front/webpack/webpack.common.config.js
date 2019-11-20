@@ -126,7 +126,7 @@ module.exports = isDev => {
         },
         {
           test: /\.(ttf|otf|svg|eot|woff|woff2)$/,
-          loader: "url-loader"
+          loader: "file-loader"
         },
         {
           test: /\.(png|svg|jpg|ico|gif)$/,
