@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Icon from '@skbkontur/react-icons';
 import Button from '@skbkontur/react-ui/components/Button/Button';
 
@@ -39,18 +39,6 @@ export const CreateOrEditMenu: React.FC<Partial<Props>> = ({
 
     const [currentService, setCurrentService] = useState(editMode ? blockId : currentIdBlock);
 
-    useEffect(
-        () => {
-            document.addEventListener('mouseup', event => {
-                const element = document.querySelector('.popup-content');
-                if (element && !element.contains(event.target as Node)) {
-                    close();
-                }
-            });
-        },
-        [close]
-    );
-
     const serviceOnChange = data => {
         setCurrentService(data.target.value);
     };
@@ -59,7 +47,7 @@ export const CreateOrEditMenu: React.FC<Partial<Props>> = ({
         const defaultValue = editMode ? (name === 'URL' ? url : title) : '';
         const placeholder = name === 'URL' ? 'domain:port' : 'Введите название сервиса';
         return (
-            <div className="popup_blockField">
+            <div className="popup_nameBlock">
                 <span className="popup_nameField">{name}</span>
                 {mode === 'input' ? (
                     <input
@@ -87,9 +75,13 @@ export const CreateOrEditMenu: React.FC<Partial<Props>> = ({
 
     const service = () => {
         return (
-            <div className="popup_blockField">
+            <div className="popup_nameBlock">
                 <span className="popup_nameField">{'СЕРВИС'}</span>
-                <select className="popup_field" onChange={serviceOnChange} defaultValue={currentIdBlock}>
+                <select
+                    className="popup_field popup_fieldService"
+                    onChange={serviceOnChange}
+                    defaultValue={currentIdBlock}
+                >
                     {blocks.map(item => (
                         <option value={item.id} key={item.id}>
                             {item.name}
@@ -134,7 +126,7 @@ export const CreateOrEditMenu: React.FC<Partial<Props>> = ({
                     <div className="popup_bodyRight">{service()}</div>
                     <div className="popup_bodyRow">
                         {field('URL')}
-                        {field('ВСПЛЫВАШКА')}
+                        {field('ЗАГОЛОВОК')}
                     </div>
                     {field('ОПИСАНИЕ', 'area')}
                 </div>
