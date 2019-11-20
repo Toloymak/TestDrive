@@ -1,4 +1,3 @@
-import Icon from '@skbkontur/react-icons';
 import Link from '@skbkontur/react-ui/components/Link';
 import React, { useState } from 'react';
 import Tooltip from '@skbkontur/react-ui/Tooltip';
@@ -58,12 +57,19 @@ export const Cell: React.FC<Partial<Props>> = ({ id, url, description, title, se
     };
 
     const tooltipMessage = () => <span>{url}</span>;
+    const renderName = (name: string) => (
+        <div className={style.fieldName}>
+            <span>{name}</span>
+        </div>
+    );
 
     return (
         <div className={style.cell}>
             <div className={style.cellEdit}>
                 <span className={'activeElm'} onClick={toggleMenu}>
-                    <Icon name={'MenuDots'} />
+                    <svg width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 1L11 11L21 1" stroke="#6879AE" />
+                    </svg>
                 </span>
                 {showMenu && (
                     <MenuItem
@@ -75,23 +81,39 @@ export const Cell: React.FC<Partial<Props>> = ({ id, url, description, title, se
                 )}
             </div>
 
-            <div className={style.header}>
-                <h2>{title}</h2>
-                <span className={style.separatorHeader} />
+            <div className={style.cellFields}>
+                {url.length > 0 && (
+                    <Tooltip pos="left bottom" trigger={'hover'} render={tooltipMessage} className={style.tooltip}>
+                        {renderName('URL')}
+                        <div className={style.field}>
+                            <Link href={url} target="_blank">
+                                <span className={style.link}>
+                                    <span>{url}</span>
+                                    <span className={style.separator} />
+                                </span>
+                            </Link>
+                        </div>
+                    </Tooltip>
+                )}
+                {title.length > 0 && (
+                    <div className={style.fieldsMargin}>
+                        {renderName('Заголовок')}
+                        <div className={style.field}>
+                            <span>{title}</span>
+                            <span className={style.separator} />
+                        </div>
+                    </div>
+                )}
+                {description.length > 0 && (
+                    <div className={style.fieldsMargin}>
+                        {renderName('Описание')}
+                        <div className={style.field}>
+                            <span>{description}</span>
+                            <span className={style.separator} />
+                        </div>
+                    </div>
+                )}
             </div>
-
-            <Tooltip pos="bottom right" trigger={'hover'} render={tooltipMessage}>
-                <div className={style.field}>
-                    <Link href={url} target="_blank">
-                        <span className={style.link}>
-                            <span>{url}</span>
-                            <span className={style.separatorField} />
-                        </span>
-                    </Link>
-                </div>
-            </Tooltip>
-
-            <textarea className={style.description} value={description} disabled={true} />
 
             {visiblePopupCreate ? <CreateOrEditMenu {...editParams} close={closePopup} /> : null}
             {warningPopup ? <DeleteConfirmedPopup id={id} close={closeWarningPopup} /> : null}

@@ -1,79 +1,76 @@
 .cell {
   width: 320px;
-  background: #2e354e;
+  background: #1D2439;
   align-items: flex-start;
   color: #fff;
-  height: 253px;
   box-shadow: 0 0 24px rgba(44, 41, 77, 0.13);
-  border-radius: 10px;
+  border-radius: 5px;
   font-style: normal;
   font-weight: normal;
   font-size: 21px;
   line-height: 25px;
   margin-top: 21px;
-  padding: 0 20px;
   box-sizing: border-box;
+  border: 1px solid #313B60;
+  font-family: Roboto, serif;
+}
+
+
+.cellFields {
+  border-top: 1px solid #313B60;
+  padding: 20px;
 }
 
 .cellEdit {
   display: flex;
-  margin-top: 15px;
+  margin: 10px 0;
+  padding-right: 15px;
   justify-content: flex-end;
 }
 
-.cellEdit,
-.field,
-.header {
+.cellEdit {
   position: relative;
   white-space: nowrap;
 }
 
-.field,
-.header {
-  overflow: hidden;
-}
-
 .link {
-  color: red;
+  color: #578FFC;
   white-space: nowrap;
 }
 
+.cellArrowEdit {
+  color: #6879AE;
+}
+
+.tooltip {
+  background: #1D2439;
+  border: 1px solid #313B60;
+}
+
 .separator {
-  &Field, &Header {
     position: absolute;
     top: 0;
     right: 0;
-    width: 30px;
-  }
-
-  &Field {
-    background: linear-gradient(to right, #38415e96, #38415e);
+    width: 14px;
     height: 100%;
-  }
-
-  &Header {
-    height: 50px;
-    background: linear-gradient(to right, #2e354e96, #2e354e);
-  }
-}
-
-.field, .description {
-  border-radius: 5px;
-  background: #38415e;
+    background: linear-gradient(to right, #1D243996, #1D2439);
 }
 
 .field {
-  height: 30px;
-  padding: 2px 10px;
   margin-bottom: 10px;
+  font-size: 22px;
+  overflow: hidden;
+  position: relative;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 26px;
 }
 
-.description {
-  width: 274px;
-  height: 90px;
+.fieldName {
+  color: #92A7E4;
+  font-size: 18px;
 }
 
-.header,
-.description {
-  color: #d9d9d9;
+.fieldsMargin {
+  margin-top: 30px;
 }
