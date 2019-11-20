@@ -39,8 +39,8 @@ module.exports = (env, args) => webpackMerge(commonConfig(args.mode === 'develop
           filename: 'index.html',
           favicon: 'src/static/favicon.ico',
           files: {
-              css: ["main.css"],
-              js: ["main.js"]
+              css: ["main-[hash].css"],
+              js: ["main-[hash].js"]
           }
       }),
         new HtmlWebpackRootPlugin("content")

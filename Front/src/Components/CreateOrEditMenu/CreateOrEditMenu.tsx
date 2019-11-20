@@ -37,7 +37,7 @@ export const CreateOrEditMenu: React.FC<Partial<Props>> = ({
         return { id: item.id, name: item.name };
     });
 
-    const [currentService, setCurrentService] = useState(currentIdBlock);
+    const [currentService, setCurrentService] = useState(editMode ? blockId : currentIdBlock);
 
     useEffect(
         () => {
@@ -88,7 +88,7 @@ export const CreateOrEditMenu: React.FC<Partial<Props>> = ({
     const service = () => {
         return (
             <div className="popup_blockField">
-                <span className="popup_nameField">{'Сервис'}</span>
+                <span className="popup_nameField">{'СЕРВИС'}</span>
                 <select className="popup_field" onChange={serviceOnChange} defaultValue={currentIdBlock}>
                     {blocks.map(item => (
                         <option value={item.id} key={item.id}>

@@ -23,8 +23,7 @@ module.exports = isDev => {
     entry: "./src/index.js",
     mode: "development",
     output: {
-      filename: "./main.js",
-      chunkFilename: "[name].bundle.js"
+      filename: isDev ? "main.js" : "main-[hash].js"
     },
     resolve: {
       modules: [nodeModules],
@@ -136,7 +135,7 @@ module.exports = isDev => {
     },
     plugins: [
       new MiniCssExtractPlugin({
-        filename: 'main.css',
+        filename: isDev ? 'main.css' : 'main-[hash].css',
         ignoreOrder: true
       }),
       new CaseSensitivePathsPlugin(),
