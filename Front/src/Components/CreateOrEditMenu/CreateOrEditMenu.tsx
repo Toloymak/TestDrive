@@ -37,7 +37,7 @@ export const CreateOrEditMenu: React.FC<Partial<Props>> = ({
         return { id: item.id, name: item.name };
     });
 
-    const [currentService, setCurrentService] = useState(editMode ? blockId : currentIdBlock);
+    const [currentService, setCurrentService] = useState(editMode ? blockId : currentIdBlock || blocks[0].id);
 
     const serviceOnChange = data => {
         setCurrentService(data.target.value);

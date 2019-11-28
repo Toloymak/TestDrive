@@ -14,23 +14,37 @@ function reorder<T>(list: T[], startIndex: number, endIndex: number): T[] {
     return result;
 }
 
-const grid = 8;
-
-const getItemStyle = (isDragging, draggableStyle) => ({
-    // some basic styles to make the items look a bit nicer
-    userSelect: 'none',
-    padding: grid * 2,
-    margin: `0 0 ${grid}px 0`,
-
-    // change background colour if dragging
-    background: isDragging ? 'lightgreen' : 'grey',
-
-    // styles we need to apply on draggables
-    ...draggableStyle
-});
-
-export const getListStyle = isDraggingOver => ({
-    background: isDraggingOver ? 'lightblue' : 'lightgrey',
-    padding: grid,
-    width: 250
-});
+// export function dragEndDual(result): void {
+//     const { source, destination } = result;
+//     if (!destination) {
+//         return;
+//     }
+//
+//     if (source.droppableId === destination.droppableId) {
+//         const items = reorder(
+//             this.getList(source.droppableId),
+//             source.index,
+//             destination.index
+//         );
+//
+//         let state = { items };
+//
+//         if (source.droppableId === 'droppable2') {
+//             state = { selected: items };
+//         }
+//
+//         this.setState(state);
+//     } else {
+//         const result = move(
+//             this.getList(source.droppableId),
+//             this.getList(destination.droppableId),
+//             source,
+//             destination
+//         );
+//
+//         this.setState({
+//             items: result.droppable,
+//             selected: result.droppable2
+//         });
+//     }
+// };
