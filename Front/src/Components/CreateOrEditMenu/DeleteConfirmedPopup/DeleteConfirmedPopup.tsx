@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const DeleteConfirmedPopup: React.FC<Props> = ({ id, close }) => {
-    const { serviceControl } = useContext(DataContext);
+    const { linkAction } = useContext(DataContext);
 
     useEffect(
         () => {
@@ -27,7 +27,7 @@ export const DeleteConfirmedPopup: React.FC<Props> = ({ id, close }) => {
 
     const delService = (): void => {
         close();
-        serviceControl(ServiceActions.del, id);
+        linkAction(ServiceActions.del, id);
     };
 
     return (

@@ -48,24 +48,24 @@ export const Context: React.FC<Props> = ({ links, name }) => {
             {linksState.length < 2 ? (
                 <div className={style.cellContainer}>
                     {linksState.map(item => (
-                        <Cell {...item} serviceName={name} key={item.id} />
+                        <Cell {...item} key={item.id} />
                     ))}
                 </div>
             ) : (
                 <>
                     <div className={style.cellContainer}>
                         {columnLinks[0].map(item => (
-                            <Cell {...item} serviceName={name} key={item.id} />
+                            <Cell {...item} key={item.id} />
                         ))}
                     </div>
                     <div className={style.cellContainer}>
                         {columnLinks[1].map(item => (
-                            <Cell {...item} serviceName={name} key={item.id} />
+                            <Cell {...item} key={item.id} />
                         ))}
                     </div>
                     <div className={style.cellContainer}>
                         {columnLinks[2].map(item => (
-                            <Cell {...item} serviceName={name} key={item.id} />
+                            <Cell {...item} key={item.id} />
                         ))}
                     </div>
                 </>

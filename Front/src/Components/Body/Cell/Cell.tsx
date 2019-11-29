@@ -9,11 +9,9 @@ import { DeleteConfirmedPopup } from 'src/Components/CreateOrEditMenu/DeleteConf
 import { MenuItem } from './Menu/MenuItem';
 import style from './Cell.module.less';
 
-interface Props extends LinkModel {
-    serviceName: string;
-}
+interface Props extends LinkModel {}
 
-export const Cell: React.FC<Partial<Props>> = ({ id, url, description, title, serviceName, blockId }) => {
+export const Cell: React.FC<Partial<Props>> = ({ id, url, description, title, blockId }) => {
     const [showMenu, setShowMenu] = useState(false);
     const [visiblePopupCreate, setVisiblePopupCreate] = useState(false);
     const [warningPopup, setWarningPopup] = useState(false);
