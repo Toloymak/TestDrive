@@ -1,0 +1,46 @@
+.item {
+  width: 100px;
+  height: 41px;
+  border-radius: 50px;
+  font-family: Roboto, serif;
+  color: #fff;
+  font-size: 21px;
+  background: #1D2439;
+  border: 1px solid #313B60;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  padding: 0 15px;
+  margin-right: 10px;
+
+  &:hover {
+    background: #272E43;
+
+    &:after {
+      background: linear-gradient(to right, #272E4396, #272E43);
+    }
+  }
+}
+
+.item:last-child {
+  margin-right: 0;
+}
+
+.item:after {
+  content: ''; /* Выводим элемент */
+  position: absolute; /* Абсолютное позиционирование */
+  right: 0; top: 0; /* Положение элемента */
+  width: 20px; /* Ширина градиента*/
+  height: 100%;
+  border-radius: 0 20px 20px 0;
+  background: linear-gradient(to right, #1D243996, #1D2439);
+}
+
+.text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-right: 10px;
+}

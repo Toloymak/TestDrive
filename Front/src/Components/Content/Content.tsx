@@ -76,6 +76,11 @@ export const Content: React.FC = () => {
         setCurrentIdBlock(allBlocks[nextBLock].id);
     };
 
+    const setIdByAccordion = (id: string) => {
+        setCounterNavigation(allContext.findIndex(i => i.id === id));
+        setCurrentIdBlock(id);
+    };
+
     const linkAction = (action: ServiceActions, data: string | LinkModel) => {
         if (action === ServiceActions.del) {
             SOCKETS.links.delete(data as string);
@@ -112,6 +117,8 @@ export const Content: React.FC = () => {
                         context={allContext[counterNavigation]}
                         counterNavigation={counterNavigation}
                         selectOtherBlock={selectOtherBlock}
+                        allBlocks={allBlocks}
+                        setIdByAccordion={setIdByAccordion}
                     />
                 ) : (
                     <CustomSpinner />
