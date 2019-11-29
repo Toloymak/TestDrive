@@ -3,7 +3,7 @@ import React from 'react';
 import shared from '@shared/Styles/StylesShared.module.less';
 import { Navigator } from 'src/Components/Content/utils';
 
-import {BlockModel, BlockModelWithLinks} from '../Content';
+import { BlockModel, BlockModelWithLinks } from '../Content';
 
 import style from './Body.module.less';
 import { ContextNavigator } from './ContextNavigator';
@@ -16,16 +16,29 @@ interface BodyProps {
     selectOtherBlock(action: Navigator): void;
     allBlocks: BlockModel[];
     setIdByAccordion(id: string): void;
+    allContext: BlockModelWithLinks[];
 }
 
-export const Body: React.FC<BodyProps> = ({ context, counterNavigation, selectOtherBlock, setIdByAccordion, allBlocks }) => {
+export const Body: React.FC<BodyProps> = ({
+    context,
+    counterNavigation,
+    selectOtherBlock,
+    setIdByAccordion,
+    allBlocks,
+    allContext
+}) => {
     const { content, container } = style;
     const { flexCenter } = shared;
     return (
         <div className={content}>
             <div className={flexCenter}>
                 <div className={container}>
-                    <ContextAccordion setIdByAccordion={setIdByAccordion} allBlocks={allBlocks} />
+                    <ContextAccordion
+                        setIdByAccordion={setIdByAccordion}
+                        allBlocks={allBlocks}
+                        currentIdBlock={context.id}
+                        allContext={allContext}
+                    />
                 </div>
             </div>
             <ContextNavigator

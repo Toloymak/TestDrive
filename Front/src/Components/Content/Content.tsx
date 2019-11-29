@@ -119,6 +119,7 @@ export const Content: React.FC = () => {
                         selectOtherBlock={selectOtherBlock}
                         allBlocks={allBlocks}
                         setIdByAccordion={setIdByAccordion}
+                        allContext={allContext}
                     />
                 ) : (
                     <CustomSpinner />

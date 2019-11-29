@@ -23,6 +23,11 @@
       background: linear-gradient(to right, #272E4396, #272E43);
     }
   }
+
+  &:active {
+    top: 1px;
+    left: -1px;
+  }
 }
 
 .item:last-child {
@@ -43,5 +48,8 @@
   display: inline-block;
   overflow: hidden;
   white-space: nowrap;
-  padding-right: 10px;
+}
+
+.active {
+  border: 1px solid #D70C17;
 }

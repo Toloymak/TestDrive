@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 
-import { BlockModel } from 'src/Components';
+import { BlockModel, BlockModelWithLinks } from 'src/Components';
 
 import style from './ItemAccordionPoint.module.less';
 import { MenuItem } from './MenuItem';
 
 interface Props {
     setIdByAccordion(id: string): void;
-    additionallyBlocks: BlockModel[];
+    additionallyContext: BlockModelWithLinks[];
+    allBlocks: BlockModel[];
 }
 
-export const ItemAccordionPoint: React.FC<Props> = ({ setIdByAccordion, additionallyBlocks }) => {
+export const ItemAccordionPoint: React.FC<Props> = ({ setIdByAccordion, additionallyContext, allBlocks }) => {
     const [showMenu, setShowMenu] = useState(false);
 
     const closeMenu = (): void => {
@@ -26,9 +27,10 @@ export const ItemAccordionPoint: React.FC<Props> = ({ setIdByAccordion, addition
             <span className={style.text}>...</span>
             {showMenu && (
                 <MenuItem
-                    additionallyBlocks={additionallyBlocks}
+                    additionallyContext={additionallyContext}
                     close={closeMenu}
                     setIdByAccordion={setIdByAccordion}
+                    allBlocks={allBlocks}
                 />
             )}
         </div>

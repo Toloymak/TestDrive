@@ -9,7 +9,7 @@ import style from './Context.module.less';
 
 interface Props extends BlockModelWithLinks {}
 
-export const Context: React.FC<Props> = ({ links, name }) => {
+export const Context: React.FC<Props> = ({ links }) => {
     const [linksState, setLinksState] = useState([]);
     const [columnLinks, setColumnLinks] = useState({
         0: [],
