@@ -58,12 +58,6 @@
 	width: 682px;
 }
 
-.popup_bodyRight {
-	display: flex;
-	justify-content: flex-end;
-	margin-bottom: 10px;
-}
-
 .popup_bodyRight>div {
 	padding-right: 0;
 }
@@ -119,4 +113,8 @@
 
 .popup_footer {
 	margin-top: 48px;
+}
+
+.popup_createBlock {
+	height: 350px;
 }

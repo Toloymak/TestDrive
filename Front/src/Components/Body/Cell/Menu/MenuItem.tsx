@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+
+import { TooltipMenu } from '@shared/Menu';
 
 import style from './Menu.module.less';
 
@@ -9,28 +11,19 @@ interface Props {
 }
 
 export const MenuItem: React.FC<Props> = ({ close, openWarningPopup, openPopup }) => {
-    useEffect(() => {
-        document.addEventListener('mouseup', event => {
-            const element = document.querySelector('.menuItem');
-            if (element && !element.contains(event.target as Element)) {
-                close();
-            }
-        });
-    }, []);
-
     const deleteComponent = () => {
         close();
         openWarningPopup();
     };
 
     return (
-        <div className={style.menuBlock}>
+        <TooltipMenu close={close}>
             <span onClick={openPopup} className={style.item}>
                 Редактировать
             </span>
             <span className={style.item} onClick={deleteComponent}>
                 Удалить
             </span>
-        </div>
+        </TooltipMenu>
     );
 };

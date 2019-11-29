@@ -32,7 +32,8 @@ export interface BlockModel {
 interface InformationModel {
     showSpinner(): void;
     hideSpinner(): void;
-    serviceControl(action: ServiceActions, data: string | LinkModel): void;
+    linkAction(action: ServiceActions, data: string | LinkModel): void;
+    blockAction(action: ServiceActions, data: Partial<BlockModel>): void;
     allBlocks: BlockModel[];
     currentIdBlock: string;
 }
@@ -70,12 +71,12 @@ export const Content: React.FC = () => {
     };
 
     const selectOtherBlock = (action: Navigator): void => {
-        const nextBLock = counterNavi(action, counterNavigation, allBlocks.length);
+        const nextBLock = counterNavi(action, counterNavigation, allContext.length);
         setCounterNavigation(nextBLock);
         setCurrentIdBlock(allBlocks[nextBLock].id);
     };
 
-    const serviceControl = (action: ServiceActions, data: string | LinkModel) => {
+    const linkAction = (action: ServiceActions, data: string | LinkModel) => {
         if (action === ServiceActions.del) {
             SOCKETS.links.delete(data as string);
         }
@@ -87,10 +88,17 @@ export const Content: React.FC = () => {
         }
     };
 
+    const blockAction = (action: ServiceActions, data: Partial<BlockModel>) => {
+        if (action === ServiceActions.create) {
+            SOCKETS.blocks.create(data);
+        }
+    };
+
     const data = {
         showSpinner,
         hideSpinner,
-        serviceControl,
+        linkAction,
+        blockAction,
         allBlocks,
         currentIdBlock
     };
