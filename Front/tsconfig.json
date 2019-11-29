@@ -14,9 +14,8 @@
     "allowSyntheticDefaultImports": true,
     "paths": {
       "src/*": ["./src/*"],
-
-      "@utils/*": ["./src/utils/*"],
       "@const/*": ["./src/Constants/*"],
+      "@utils/*": ["./src/utils/*"],
       "@shared/*": ["./src/Components/Shared/*"]
     }
   }

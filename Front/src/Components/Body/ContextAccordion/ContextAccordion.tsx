@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 import { BlockModel } from 'src/Components';
+import { ItemAccordionPoint } from 'src/Components/Body/ContextAccordion/ItemAccordionPoints';
+import { MAX_NUMBERS_CONTEXT_IN_ACCORDION } from 'src/constants';
 
 import { ItemAccordion } from './ItemAccordion';
 
@@ -15,11 +17,11 @@ export const ContextAccordion: React.FC<Props> = ({ allBlocks, setIdByAccordion 
 
     useEffect(
         () => {
-            if (allBlocks.length < 6) {
+            if (allBlocks.length < MAX_NUMBERS_CONTEXT_IN_ACCORDION) {
                 setActualBlocks(allBlocks);
             } else {
-                setActualBlocks(allBlocks.slice(0, 6));
-                setAdditionallyBlocks(allBlocks.slice(6));
+                setActualBlocks(allBlocks.slice(0, MAX_NUMBERS_CONTEXT_IN_ACCORDION));
+                setAdditionallyBlocks(allBlocks.slice(MAX_NUMBERS_CONTEXT_IN_ACCORDION));
             }
         },
         [allBlocks]
@@ -30,6 +32,9 @@ export const ContextAccordion: React.FC<Props> = ({ allBlocks, setIdByAccordion 
             {actualBlocks.map(item => (
                 <ItemAccordion id={item.id} contextName={item.name} key={item.id} setIdByAccordion={setIdByAccordion} />
             ))}
+            {additionallyBlocks.length > 0 && (
+                <ItemAccordionPoint setIdByAccordion={setIdByAccordion} additionallyBlocks={additionallyBlocks} />
+            )}
         </>
     );
 };

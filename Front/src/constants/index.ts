@@ -1,0 +1,1 @@
+export const MAX_NUMBERS_CONTEXT_IN_ACCORDION = 6;

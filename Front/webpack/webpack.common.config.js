@@ -12,7 +12,8 @@ const src = helpers.root("src");
 const tsconfig = require("../tsconfig.json");
 const TSConfigFile = helpers.root("tsconfig.json");
 
-const tsPaths = {};
+let tsPaths = {};
+
 Object.keys(tsconfig.compilerOptions.paths).forEach(t => {
   const value = tsconfig.compilerOptions.paths[t][0];
   tsPaths[t.replace(/\/\*$/g, "")] = helpers.root(value.replace(/\/\*$/g, ""));
