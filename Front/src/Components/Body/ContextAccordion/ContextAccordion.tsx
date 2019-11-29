@@ -32,6 +32,7 @@ export const ContextAccordion: React.FC<Props> = ({ allBlocks, setIdByAccordion,
     return (
         <>
             {actualContext.length > 0 &&
+                allBlocks.length > 0 &&
                 actualContext.map(item => (
                     <ItemAccordion
                         id={item.id}

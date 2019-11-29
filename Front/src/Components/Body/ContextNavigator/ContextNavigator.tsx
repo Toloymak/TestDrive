@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { classContainer, className, classNavi } from 'src/Components/Body/ContextNavigator/utils/ClassesElements';
 import { Navigator } from 'src/Components/Content/utils';
@@ -11,6 +11,7 @@ interface Props {
 }
 
 export const ContextNavigator: React.FC<Props> = ({ serviceName, selectOtherBlock }) => {
+    const [arrowColor, setArrowColor] = useState('#1D2439');
     const next = (): void => {
         selectOtherBlock(Navigator.next);
     };
@@ -18,6 +19,18 @@ export const ContextNavigator: React.FC<Props> = ({ serviceName, selectOtherBloc
     const preview = (): void => {
         selectOtherBlock(Navigator.preview);
     };
+
+    const arrows = document.querySelectorAll(`.${classNavi}`);
+    if (arrows.length) {
+        arrows.forEach(item => {
+            item.addEventListener('mousedown', () => {
+                setArrowColor('#1D2439');
+            });
+            item.addEventListener('mouseup', () => {
+                setArrowColor('#1D243996');
+            });
+        });
+    }
 
     return (
         <div className={classContainer}>
@@ -30,7 +43,7 @@ export const ContextNavigator: React.FC<Props> = ({ serviceName, selectOtherBloc
                         height="40"
                         rx="20"
                         transform="rotate(-90 0.5 40.5)"
-                        fill="#1D2439"
+                        fill={arrowColor}
                         stroke="#313B60"
                     />
                     <path
@@ -52,7 +65,7 @@ export const ContextNavigator: React.FC<Props> = ({ serviceName, selectOtherBloc
                         height="40"
                         rx="20"
                         transform="rotate(90 40.5 0.5)"
-                        fill="#1D2439"
+                        fill={arrowColor}
                         stroke="#313B60"
                     />
                     <path
