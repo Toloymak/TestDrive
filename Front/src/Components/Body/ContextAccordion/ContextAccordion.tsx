@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { BlockModel } from 'src/Components';
 import { ItemAccordionPoint } from 'src/Components/Body/ContextAccordion/ItemAccordionPoints';
-import { MAX_NUMBERS_CONTEXT_IN_ACCORDION } from 'src/constants';
+import { MAX_NUMBERS_CONTEXT_IN_ACCORDION } from '@const/index';
 
 import { ItemAccordion } from './ItemAccordion';
 
