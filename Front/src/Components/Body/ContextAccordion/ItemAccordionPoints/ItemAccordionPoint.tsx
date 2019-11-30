@@ -15,15 +15,15 @@ export const ItemAccordionPoint: React.FC<Props> = ({ setIdByAccordion, addition
     const [showMenu, setShowMenu] = useState(false);
 
     const closeMenu = (): void => {
-        setShowMenu(false);
+        setTimeout(() => setShowMenu(false), 0);
     };
 
-    const openOrCloseMenu = (): void => {
-        setShowMenu(prevState => !prevState);
+    const openMenu = (): void => {
+        setShowMenu(true);
     };
 
     return (
-        <div className={style.item} onClick={openOrCloseMenu}>
+        <div className={style.item} onClick={openMenu}>
             <span className={style.text}>...</span>
             {showMenu && (
                 <MenuItem

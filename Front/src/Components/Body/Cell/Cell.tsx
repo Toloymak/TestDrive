@@ -17,7 +17,7 @@ export const Cell: React.FC<Partial<Props>> = ({ id, url, description, title, bl
     const [warningPopup, setWarningPopup] = useState(false);
 
     const closeMenu = (): void => {
-        setShowMenu(false);
+        setTimeout(() => setShowMenu(false), 0);
     };
 
     const openPopup = (): void => {
