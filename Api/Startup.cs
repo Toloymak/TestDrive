@@ -39,7 +39,8 @@ namespace Api
 
             services.AddCors()
                 .AddCustomSwaggerGet()
-                .AddMvc(option => option.EnableEndpointRouting = false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+                .AddMvc(option => option.EnableEndpointRouting = false)
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -52,39 +53,14 @@ namespace Api
             {
                 app.UseHsts();
             }
-
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "TestDrive — Api V1");
-                c.RoutePrefix = string.Empty;
-            });
             
             app.UseHttpsRedirection();
             app.UseMvcWithDefaultRoute();
-
-            app.UseCors(builder =>
-            {
-                // todo: Сделать тут нормально
-                builder.WithOrigins(
-                "http://localhost:9000",
-                "http://localhost:9010",
-                "http://vm-lastmile",
-                "https://vm-lastmile",
-                "https://vm-lastmile.kontur",
-                "http://vm-lastmile.kontur"
-                )
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials();
-            });
             app.UseRouting();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapHub<FrontLinkHub>("/frontLinks");
-                endpoints.MapHub<LinkHub>("/links");
-                endpoints.MapHub<BlockHub>("/blocks");
-            });
+            
+            app.ConfigureSwagger();
+            app.ConfigureHubs();
+            app.ConfigureCors();
         }
     }
 }
