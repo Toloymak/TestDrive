@@ -1,4 +1,4 @@
-namespace Core.Logic.Dtos
+namespace Core.Dtos
 {
     using System;
 

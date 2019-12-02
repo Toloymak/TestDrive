@@ -6,9 +6,10 @@ using DataLayer.Entities;
 namespace Core.Logic.Links
 {
     using Core.Logic.Base;
-    using Core.Logic.Dtos;
 
     using DataLayer;
+
+    using Dtos;
 
     public class LinkReader: ReaderBase<Link, LinkDto>
     {

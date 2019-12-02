@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
-    using Core.Logic.Dtos;
+    using Core.Dtos;
 
     [Route("api/[controller]")]
     [ApiController]

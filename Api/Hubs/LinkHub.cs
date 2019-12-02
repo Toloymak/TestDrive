@@ -3,8 +3,8 @@
     using System;
     using System.Threading.Tasks;
 
+    using Core.Dtos;
     using Core.Logic.Contexts;
-    using Core.Logic.Dtos;
     using Core.Logic.Links;
 
     using Microsoft.AspNetCore.SignalR;

@@ -6,6 +6,7 @@
 
     using Core.Logic.Links;
     using Core.Logic.Contexts;
+    using Core.Logic.Users;
     using Core.Mapping;
 
     using Microsoft.AspNetCore.Builder;
@@ -33,7 +34,8 @@
                 .AddScoped<ContextWriter>()
                 .AddScoped<ContextReader>()
                 .AddScoped<LinkReader>()
-                .AddScoped<LinkWriter>();
+                .AddScoped<LinkWriter>()
+                .AddScoped<UserReader>();
 
             services.AddSignalR();
 
