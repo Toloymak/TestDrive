@@ -1,8 +1,5 @@
-using System.Collections.Generic;
 using AutoMapper;
-using Core.Logic.Links;
-using DatabaseLayer.Entities.Blocks;
-using DataLayer.Entities;
+using System.Collections.Generic;
 
 namespace Core.Mapping
 {
@@ -12,7 +9,6 @@ namespace Core.Mapping
             new Mapper(new MapperConfiguration(c => c.AddProfiles(
                 new List<Profile>
                 {
-                    new LinkMappingProfile(),
                     new BlockMappingProfile()
                 })));
     }

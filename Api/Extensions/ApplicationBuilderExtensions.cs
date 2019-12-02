@@ -10,7 +10,6 @@
         {
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapHub<FrontLinkHub>("/frontLinks");
                 endpoints.MapHub<LinkHub>("/links");
                 endpoints.MapHub<BlockHub>("/blocks");
             });

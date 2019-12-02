@@ -1,10 +1,11 @@
 ﻿using System;
 using Core.Logic.Links;
-using DatabaseLayer.Entities.Blocks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    using Core.Logic.Dtos;
+
     [Route("api/[controller]")]
     [ApiController]
     public class LinksController : ControllerBase
@@ -30,18 +31,6 @@ namespace Api.Controllers
             return Ok(links);
         }
 
-        /// <summary>
-        /// Get links for old react front, which are used in websockets
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        [Route("likeFront")]
-        public IActionResult GetFrontLinks()
-        {
-            var models = linkReader.GetAllFrontLinkModels();
-            return Ok(models);
-        }
-        
         /// <summary>
         /// Create link
         /// </summary>

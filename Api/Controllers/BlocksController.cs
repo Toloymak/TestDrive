@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Api.Hubs;
-using AutoMapper;
-using DatabaseLayer.Entities.Blocks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    using Core.Logic.Blocks;
+    using Core.Logic.Dtos;
+
     [Route("api/[controller]")]
     [ApiController]
     public class BlocksController : ControllerBase

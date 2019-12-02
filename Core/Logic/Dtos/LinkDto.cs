@@ -1,7 +1,7 @@
-using System;
-
-namespace Core.Logic.Links
+namespace Core.Logic.Dtos
 {
+    using System;
+
     public class LinkDto
     {
         public Guid? Id { get; set; }

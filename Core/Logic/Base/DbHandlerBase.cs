@@ -1,11 +1,16 @@
-using System;
-using System.Linq;
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-
-namespace DatabaseLayer.Entities.Base
+namespace Core.Logic.Base
 {
-    public class DbHandlerBase<TEntity> where TEntity : EntityBase
+    using System;
+    using System.Linq;
+
+    using AutoMapper;
+
+    using DataLayer;
+    using DataLayer.Entities;
+
+    using Microsoft.EntityFrameworkCore;
+
+    public class DbHandlerBase<TEntity> where TEntity : BaseEntity
     {
         protected readonly DriveContext DriveContext;
         protected readonly IMapper Mapper;
@@ -13,7 +18,7 @@ namespace DatabaseLayer.Entities.Base
         protected DbHandlerBase(DriveContext driveContext, IMapper mapper)
         {
             this.DriveContext = driveContext;
-            Mapper = mapper;
+            this.Mapper = mapper;
         }
         
         protected TEntity Get(Guid id) =>

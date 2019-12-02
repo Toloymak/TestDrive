@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Core.Logic.Links;
-using DataLayer.Entities;
-
-namespace DatabaseLayer.Entities.Blocks
+﻿namespace Core.Logic.Dtos
 {
+    using System;
+    using System.Collections.Generic;
+
     public class BlockWithLinkDto
     {
         public Guid Id { get; set; }

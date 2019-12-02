@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Core.Logic.Links;
-using DatabaseLayer.Entities.Base;
-using DatabaseLayer.Entities.Blocks;
 using Microsoft.AspNetCore.SignalR;
 
 namespace Api.Hubs
 {
+    using Core.Logic.Blocks;
+    using Core.Logic.Dtos;
+
     public class LinkHub: BaseHub
     {
         private readonly LinkReader linkReader;

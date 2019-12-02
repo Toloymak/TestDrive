@@ -1,8 +1,8 @@
-using System;
-using System.ComponentModel;
-
-namespace DatabaseLayer.Entities.Blocks
+namespace Core.Logic.Dtos
 {
+    using System;
+    using System.ComponentModel;
+
     public class BlockDto
     {
         public Guid? Id { get; set; }

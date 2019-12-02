@@ -1,18 +1,19 @@
-using DatabaseLayer.Entities.Blocks;
-using DataLayer.Entities;
-using Microsoft.EntityFrameworkCore;
-
-namespace DatabaseLayer
+namespace DataLayer
 {
+    using DataLayer.Entities;
+
+    using Microsoft.EntityFrameworkCore;
+
     public class DriveContext: DbContext
     {
         public DriveContext()
         {
-            Database.EnsureCreated();
+            this.Database.EnsureCreated();
         }
         
         public DbSet<Link> Links { get; set; }
-        public DbSet<Block> Blocks { get; set; }
+
+        public DbSet<Context> Blocks { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

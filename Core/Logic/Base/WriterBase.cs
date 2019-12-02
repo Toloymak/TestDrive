@@ -1,11 +1,13 @@
-using System;
-using AutoMapper;
-using DatabaseLayer.Entities.Blocks;
-using DataLayer.Entities;
-
-namespace DatabaseLayer.Entities.Base
+namespace Core.Logic.Base
 {
-    public class WriterBase<TEntry, TDto>: DbHandlerBase<TEntry> where TEntry : EntityBase
+    using System;
+
+    using AutoMapper;
+
+    using DataLayer;
+    using DataLayer.Entities;
+
+    public class WriterBase<TEntry, TDto>: DbHandlerBase<TEntry> where TEntry : BaseEntity
     {
         protected WriterBase(DriveContext driveContext, IMapper mapper) : base(driveContext, mapper)
         {
@@ -37,10 +39,10 @@ namespace DatabaseLayer.Entities.Base
 
         public bool Delete(Guid id)
         {
-            var entity = DriveContext.Set<TEntry>().Find(id);
+            var entity = this.DriveContext.Set<TEntry>().Find(id);
             
-            DriveContext.Remove(entity);
-            DriveContext.SaveChanges();
+            this.DriveContext.Remove(entity);
+            this.DriveContext.SaveChanges();
             
             return true;
         }

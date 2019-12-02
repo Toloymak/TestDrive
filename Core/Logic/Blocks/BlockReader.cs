@@ -1,13 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
-using DatabaseLayer.Entities.Base;
-using Microsoft.EntityFrameworkCore;
-
-namespace DatabaseLayer.Entities.Blocks
+namespace Core.Logic.Blocks
 {
-    public class BlockReader: ReaderBase<Block, BlockDto>
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using AutoMapper;
+
+    using Core.Logic.Base;
+    using Core.Logic.Dtos;
+
+    using DataLayer;
+    using DataLayer.Entities;
+
+    using Microsoft.EntityFrameworkCore;
+
+    public class BlockReader: ReaderBase<Context, BlockDto>
     {
         public BlockReader(DriveContext driveContext, IMapper mapper) 
             : base(driveContext, mapper)
@@ -16,8 +23,8 @@ namespace DatabaseLayer.Entities.Blocks
 
         public IList<BlockWithLinkDto> GetAllBlocksWithLink()
         {
-            var blocks = Mapper.Map<IList<BlockWithLinkDto>>(
-                All
+            var blocks = this.Mapper.Map<IList<BlockWithLinkDto>>(
+                this.All
                     .Include(b => b.Links));
             
             return blocks;
@@ -25,16 +32,16 @@ namespace DatabaseLayer.Entities.Blocks
         
         public BlockWithLinkDto GetBlocksWithLink(Guid id)
         {
-            var block = Mapper.Map<BlockWithLinkDto>(
-                All
+            var block = this.Mapper.Map<BlockWithLinkDto>(
+                this.All
                     .Include(b => b.Links)
                     .First(b => b.Id == id));
             
             return block;
         }
 
-        public BlockDto GetByName(string name) => Mapper.Map<BlockDto>(
-            All
+        public BlockDto GetByName(string name) => this.Mapper.Map<BlockDto>(
+            this.All
                 .FirstOrDefault(b => string.Equals(
                     b.Name,
                     name,

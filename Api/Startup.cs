@@ -1,12 +1,7 @@
 ﻿using Api.Extensions;
-using Api.Hubs;
 using AutoMapper;
 using Core.Logic.Links;
-using Core.Managers;
 using Core.Mapping;
-using DatabaseLayer;
-using DatabaseLayer.Entities.Blocks;
-using DataLayer.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +11,10 @@ using Microsoft.Extensions.Hosting;
 
 namespace Api
 {
+    using Core.Logic.Blocks;
+
+    using DataLayer;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -32,9 +31,8 @@ namespace Api
                 .AddScoped<BlockWriter>()
                 .AddScoped<BlockReader>()
                 .AddScoped<LinkReader>()
-                .AddScoped<LinkWriter>()
-                .AddScoped<FrontManager>();
-            
+                .AddScoped<LinkWriter>();
+
             services.AddSignalR();
 
             services.AddCors()
