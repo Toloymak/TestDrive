@@ -7,12 +7,12 @@ namespace Api.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    public class BlocksController : ControllerBase
+    public class ContextsController : ControllerBase
     {
         private readonly ContextReader contextReader;
         private readonly ContextWriter contextWriter;
         
-        public BlocksController(ContextWriter contextWriter,
+        public ContextsController(ContextWriter contextWriter,
                                 ContextReader contextReader)
         {
             this.contextWriter = contextWriter;
@@ -20,7 +20,7 @@ namespace Api.Controllers
         }
 
         /// <summary>
-        /// Get all blocks
+        /// Get all contexts
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -31,7 +31,7 @@ namespace Api.Controllers
         }
         
         /// <summary>
-        /// Create block
+        /// Create context
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
@@ -43,15 +43,15 @@ namespace Api.Controllers
         }
         
         /// <summary>
-        /// Get all blocks with included links
+        /// Get all contexts with included links
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         [Route("links")]
         public IActionResult GetLinks()
         {
-            var blocks = this.contextReader.GetAllBlocksWithLink();
-            return Ok(blocks);
+            var contexts = this.contextReader.GetAllContextsWithLinks();
+            return Ok(contexts);
         }
     }
 }

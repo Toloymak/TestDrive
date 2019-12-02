@@ -8,7 +8,6 @@ namespace Core.Logic.Contexts
 
     using Core.Dtos;
     using Core.Logic.Base;
-    using Core.Logic.Dtos;
 
     using DataLayer;
     using DataLayer.Entities;
@@ -22,23 +21,23 @@ namespace Core.Logic.Contexts
         {
         }
 
-        public IList<BlockWithLinkDto> GetAllBlocksWithLink()
+        public IList<ContextWithLinksDto> GetAllContextsWithLinks()
         {
-            var blocks = this.Mapper.Map<IList<BlockWithLinkDto>>(
+            var contexts = this.Mapper.Map<IList<ContextWithLinksDto>>(
                 this.All
                     .Include(b => b.Links));
             
-            return blocks;
+            return contexts;
         }
         
-        public BlockWithLinkDto GetBlocksWithLink(Guid id)
+        public ContextWithLinksDto GetContextWithLinks(Guid id)
         {
-            var block = this.Mapper.Map<BlockWithLinkDto>(
+            var context = this.Mapper.Map<ContextWithLinksDto>(
                 this.All
                     .Include(b => b.Links)
                     .First(b => b.Id == id));
             
-            return block;
+            return context;
         }
 
         public ContextDto GetByName(string name) => this.Mapper.Map<ContextDto>(

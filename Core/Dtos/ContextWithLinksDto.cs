@@ -5,7 +5,7 @@
 
     using Core.Logic.Dtos;
 
-    public class BlockWithLinkDto
+    public class ContextWithLinksDto
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

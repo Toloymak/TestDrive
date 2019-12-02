@@ -8,8 +8,8 @@ namespace DataLayer.Entities
         public string Title { get; set; }
         public string Description { get; set; }
         public int IndexNumber { get; set; }
-        
-        public Guid BlockId { get; set; }
+
+        public Guid ContextId { get; set; }
         public virtual Context Context { get; set; }
     }
 }

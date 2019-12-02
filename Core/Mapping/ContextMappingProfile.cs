@@ -3,7 +3,6 @@ using AutoMapper;
 namespace Core.Mapping
 {
     using Core.Dtos;
-    using Core.Logic.Dtos;
 
     using DataLayer.Entities;
 
@@ -11,7 +10,7 @@ namespace Core.Mapping
         public ContextMappingProfile() {
             CreateMap<Context, ContextDto>();
             CreateMap<ContextDto, Context>();
-            CreateMap<Context, BlockWithLinkDto>();
+            CreateMap<Context, ContextWithLinksDto>();
         }
     }
 }

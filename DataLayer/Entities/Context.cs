@@ -5,7 +5,8 @@ namespace DataLayer.Entities
     public class Context: BaseEntity
     {
         public string Name { get; set; }
-        public int Priority { get; set; }
+
+        public int IndexNumber { get; set; }
         
         public IList<Link> Links { get; set; }
     }

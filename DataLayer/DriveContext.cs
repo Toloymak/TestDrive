@@ -13,7 +13,7 @@ namespace DataLayer
         
         public DbSet<Link> Links { get; set; }
 
-        public DbSet<Context> Blocks { get; set; }
+        public DbSet<Context> Contexts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

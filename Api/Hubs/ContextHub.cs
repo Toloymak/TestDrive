@@ -33,10 +33,10 @@ namespace Api.Hubs
 
         public async Task Update(ContextDto contextDto)
         {
-            var oldBlock = this.contextReader.GetDto(contextDto.Id.Value);
-            if (oldBlock == null)
+            var oldContext = this.contextReader.GetDto(contextDto.Id.GetValueOrDefault());
+            if (oldContext == null)
             {
-                await Clients.Client(this.Context.ConnectionId).SendAsync("Error", "Block не найден в базе");
+                await Clients.Client(this.Context.ConnectionId).SendAsync("Error", "Context не найден в базе");
             }
 
             this.contextWriter.Update(contextDto);
@@ -44,10 +44,10 @@ namespace Api.Hubs
         
         public async Task Delete(Guid id)
         {
-            var oldBlock = this.contextReader.GetDto(id);
-            if (oldBlock == null)
+            var context = this.contextReader.GetDto(id);
+            if (context == null)
             {
-                await Clients.Client(this.Context.ConnectionId).SendAsync("Error", "Block не найден в базе");
+                await Clients.Client(this.Context.ConnectionId).SendAsync("Error", "Context не найден в базе");
             }
 
             this.contextWriter.Delete(id);
@@ -55,8 +55,9 @@ namespace Api.Hubs
 
         private async Task SendMessageToAllClients()
         {
-            var blockDtos = this.contextReader.GetAllDto();
-            await Clients.All.SendAsync("Get", blockDtos);
+            var contextDtos = this.contextReader.GetAllDto();
+
+            await Clients.All.SendAsync("Get", contextDtos);
         }
     }
 }

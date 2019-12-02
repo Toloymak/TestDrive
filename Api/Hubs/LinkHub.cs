@@ -39,7 +39,7 @@
             var oldLink = linkReader.GetDto(linkDto.Id.Value);
             if (oldLink == null)
             {
-                await Clients.Client(this.Context.ConnectionId).SendAsync("Error", "Block не найден в базе");
+                await Clients.Client(this.Context.ConnectionId).SendAsync("Error", "Context не найден в базе");
             }
 
             linkWriter.Update(linkDto);
@@ -51,7 +51,7 @@
             var oldLink = linkReader.GetDto(id);
             if (oldLink == null)
             {
-                await Clients.Client(this.Context.ConnectionId).SendAsync("Error", "Block не найден в базе");
+                await Clients.Client(this.Context.ConnectionId).SendAsync("Error", "Context не найден в базе");
             }
 
             try
@@ -69,8 +69,8 @@
 
         private async Task SendMessageToAllClients()
         {
-            var blocks = this.contextReader.GetAllBlocksWithLink();
-            await Clients.All.SendAsync("Get", blocks);
+            var contexts = this.contextReader.GetAllContextsWithLinks();
+            await Clients.All.SendAsync("Get", contexts);
         }
     }
 }
