@@ -9,7 +9,7 @@ namespace Core.Mapping
             new Mapper(new MapperConfiguration(c => c.AddProfiles(
                 new List<Profile>
                 {
-                    new BlockMappingProfile()
+                    new ContextMappingProfile()
                 })));
     }
 }

@@ -1,9 +1,9 @@
-namespace Core.Logic.Dtos
+namespace Core.Dtos
 {
     using System;
     using System.ComponentModel;
 
-    public class BlockDto
+    public class ContextDto
     {
         public Guid? Id { get; set; }
 

@@ -1,7 +1,9 @@
-﻿namespace Core.Logic.Dtos
+﻿namespace Core.Dtos
 {
     using System;
     using System.Collections.Generic;
+
+    using Core.Logic.Dtos;
 
     public class BlockWithLinkDto
     {

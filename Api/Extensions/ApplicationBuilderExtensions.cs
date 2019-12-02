@@ -11,7 +11,7 @@
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapHub<LinkHub>("/links");
-                endpoints.MapHub<BlockHub>("/blocks");
+                endpoints.MapHub<ContextHub>("/contexts");
             });
             return app;
         }

@@ -1,24 +1,25 @@
-﻿using System;
-using System.Threading.Tasks;
-using Core.Logic.Links;
-using Microsoft.AspNetCore.SignalR;
-
-namespace Api.Hubs
+﻿namespace Api.Hubs
 {
-    using Core.Logic.Blocks;
+    using System;
+    using System.Threading.Tasks;
+
+    using Core.Logic.Contexts;
     using Core.Logic.Dtos;
+    using Core.Logic.Links;
+
+    using Microsoft.AspNetCore.SignalR;
 
     public class LinkHub: BaseHub
     {
         private readonly LinkReader linkReader;
         private readonly LinkWriter linkWriter;
-        private readonly BlockReader blockReader;
+        private readonly ContextReader contextReader;
 
-        public LinkHub(LinkReader linkReader, LinkWriter linkWriter, BlockReader blockReader)
+        public LinkHub(LinkReader linkReader, LinkWriter linkWriter, ContextReader contextReader)
         {
             this.linkReader = linkReader;
             this.linkWriter = linkWriter;
-            this.blockReader = blockReader;
+            this.contextReader = contextReader;
         }
 
         public override async Task OnConnectedAsync()
@@ -68,7 +69,7 @@ namespace Api.Hubs
 
         private async Task SendMessageToAllClients()
         {
-            var blocks = blockReader.GetAllBlocksWithLink();
+            var blocks = this.contextReader.GetAllBlocksWithLink();
             await Clients.All.SendAsync("Get", blocks);
         }
     }

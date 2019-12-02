@@ -4,18 +4,18 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace Api.Hubs
 {
-    using Core.Logic.Blocks;
-    using Core.Logic.Dtos;
+    using Core.Dtos;
+    using Core.Logic.Contexts;
 
-    public class BlockHub: BaseHub
+    public class ContextHub: BaseHub
     {
-        private readonly BlockReader blockReader;
-        private readonly BlockWriter blockWriter;
+        private readonly ContextReader contextReader;
+        private readonly ContextWriter contextWriter;
 
-        public BlockHub(BlockReader blockReader, BlockWriter blockWriter)
+        public ContextHub(ContextReader contextReader, ContextWriter contextWriter)
         {
-            this.blockReader = blockReader;
-            this.blockWriter = blockWriter;
+            this.contextReader = contextReader;
+            this.contextWriter = contextWriter;
         }
 
         public override async Task OnConnectedAsync()
@@ -25,37 +25,37 @@ namespace Api.Hubs
             await base.OnConnectedAsync();
         }
         
-        public async Task Create(BlockDto blockDto)
+        public async Task Create(ContextDto contextDto)
         {
-            blockWriter.Create(blockDto);
+            this.contextWriter.Create(contextDto);
             await SendMessageToAllClients();
         }
 
-        public async Task Update(BlockDto blockDto)
+        public async Task Update(ContextDto contextDto)
         {
-            var oldBlock = blockReader.GetDto(blockDto.Id.Value);
+            var oldBlock = this.contextReader.GetDto(contextDto.Id.Value);
             if (oldBlock == null)
             {
                 await Clients.Client(this.Context.ConnectionId).SendAsync("Error", "Block не найден в базе");
             }
 
-            blockWriter.Update(blockDto);
+            this.contextWriter.Update(contextDto);
         }
         
         public async Task Delete(Guid id)
         {
-            var oldBlock = blockReader.GetDto(id);
+            var oldBlock = this.contextReader.GetDto(id);
             if (oldBlock == null)
             {
                 await Clients.Client(this.Context.ConnectionId).SendAsync("Error", "Block не найден в базе");
             }
 
-            blockWriter.Delete(id);
+            this.contextWriter.Delete(id);
         }
 
         private async Task SendMessageToAllClients()
         {
-            var blockDtos = blockReader.GetAllDto();
+            var blockDtos = this.contextReader.GetAllDto();
             await Clients.All.SendAsync("Get", blockDtos);
         }
     }

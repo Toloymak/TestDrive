@@ -2,21 +2,21 @@
 
 namespace Api.Controllers
 {
-    using Core.Logic.Blocks;
-    using Core.Logic.Dtos;
+    using Core.Dtos;
+    using Core.Logic.Contexts;
 
     [Route("api/[controller]")]
     [ApiController]
     public class BlocksController : ControllerBase
     {
-        private readonly BlockReader blockReader;
-        private readonly BlockWriter blockWriter;
+        private readonly ContextReader contextReader;
+        private readonly ContextWriter contextWriter;
         
-        public BlocksController(BlockWriter blockWriter,
-                                BlockReader blockReader)
+        public BlocksController(ContextWriter contextWriter,
+                                ContextReader contextReader)
         {
-            this.blockWriter = blockWriter;
-            this.blockReader = blockReader;
+            this.contextWriter = contextWriter;
+            this.contextReader = contextReader;
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Api.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var result = this.blockReader.GetAllDto();
+            var result = this.contextReader.GetAllDto();
             return Ok(result);
         }
         
@@ -36,9 +36,9 @@ namespace Api.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Post([FromBody] BlockDto dto)
+        public IActionResult Post([FromBody] ContextDto dto)
         {
-            var result = blockWriter.Create(dto);
+            var result = this.contextWriter.Create(dto);
             return Ok(result);
         }
         
@@ -50,7 +50,7 @@ namespace Api.Controllers
         [Route("links")]
         public IActionResult GetLinks()
         {
-            var blocks = blockReader.GetAllBlocksWithLink();
+            var blocks = this.contextReader.GetAllBlocksWithLink();
             return Ok(blocks);
         }
     }

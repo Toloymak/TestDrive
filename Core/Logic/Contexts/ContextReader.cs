@@ -1,4 +1,4 @@
-namespace Core.Logic.Blocks
+namespace Core.Logic.Contexts
 {
     using System;
     using System.Collections.Generic;
@@ -6,6 +6,7 @@ namespace Core.Logic.Blocks
 
     using AutoMapper;
 
+    using Core.Dtos;
     using Core.Logic.Base;
     using Core.Logic.Dtos;
 
@@ -14,9 +15,9 @@ namespace Core.Logic.Blocks
 
     using Microsoft.EntityFrameworkCore;
 
-    public class BlockReader: ReaderBase<Context, BlockDto>
+    public class ContextReader: ReaderBase<Context, ContextDto>
     {
-        public BlockReader(DriveContext driveContext, IMapper mapper) 
+        public ContextReader(DriveContext driveContext, IMapper mapper) 
             : base(driveContext, mapper)
         {
         }
@@ -40,7 +41,7 @@ namespace Core.Logic.Blocks
             return block;
         }
 
-        public BlockDto GetByName(string name) => this.Mapper.Map<BlockDto>(
+        public ContextDto GetByName(string name) => this.Mapper.Map<ContextDto>(
             this.All
                 .FirstOrDefault(b => string.Equals(
                     b.Name,

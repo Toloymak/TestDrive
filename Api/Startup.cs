@@ -1,17 +1,19 @@
-﻿using Api.Extensions;
-using AutoMapper;
-using Core.Logic.Links;
-using Core.Mapping;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-
-namespace Api
+﻿namespace Api
 {
-    using Core.Logic.Blocks;
+    using Api.Extensions;
+
+    using AutoMapper;
+
+    using Core.Logic.Links;
+    using Core.Logic.Contexts;
+    using Core.Mapping;
+
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
 
     using DataLayer;
 
@@ -28,8 +30,8 @@ namespace Api
         {
             services.AddSingleton<IMapper>(MapperManager.Create())
                 .AddScoped<DriveContext>()
-                .AddScoped<BlockWriter>()
-                .AddScoped<BlockReader>()
+                .AddScoped<ContextWriter>()
+                .AddScoped<ContextReader>()
                 .AddScoped<LinkReader>()
                 .AddScoped<LinkWriter>();
 
