@@ -1,4 +1,4 @@
-namespace Core.Mapping
+namespace Core.Mapping.Profiles
 {
     using System.Collections.Generic;
 
@@ -12,8 +12,7 @@ namespace Core.Mapping
                 {
                     new LinkMappingProfile(),
                     new ContextMappingProfile(),
-                    new ContextOrderProfile(),
-                    new HiddenContextProfile(),
+                    new UserContextProfile(),
                     new UserMappingProfile()
                 })
             ));

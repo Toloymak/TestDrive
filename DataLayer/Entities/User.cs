@@ -6,7 +6,6 @@
     {
         public string Name { get; set; }
         
-        public IList<ContextOrder> BlockOrders { get; set; }
-        public IList<HiddenContext> HiddenBlocks { get; set; }
+        public virtual IList<UserContext> UserContexts { get; set; }
     }
 }

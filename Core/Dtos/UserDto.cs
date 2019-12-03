@@ -8,7 +8,6 @@
         public Guid Id { get; set; }
         public string Name { get; set; }
 
-        public IList<HiddenContextDto> HiddenContextDtos { get; set; }
-        public IList<ContextOrderDto> ContextOrderDtos { get; set; }
+        public IList<UserContextDto> UserContexts { get; set; }
     }
 }

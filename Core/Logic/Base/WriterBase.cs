@@ -13,9 +13,14 @@ namespace Core.Logic.Base
         {
         }
         
-        public Guid Create(TDto dto, bool needSave = true)
+        public virtual Guid Create(TDto dto, bool needSave = true)
         {
             var entity = this.Mapper.Map<TEntry>(dto);
+            return Create(entity, needSave);
+        }
+        
+        public virtual Guid Create(TEntry entity, bool needSave = true)
+        {
             this.DriveContext.Add(entity);
             if (needSave)
             {
@@ -25,9 +30,14 @@ namespace Core.Logic.Base
             return entity.Id;
         }
         
-        public Guid Update(TDto dto, bool needSave = true)
+        public virtual Guid Update(TDto dto, bool needSave = true)
         {
             var entity = this.Mapper.Map<TEntry>(dto);
+            return Update(entity, needSave);
+        }
+        
+        public virtual Guid Update(TEntry entity, bool needSave = true)
+        {
             this.DriveContext.Update(entity);
             if (needSave)
             {
@@ -37,12 +47,14 @@ namespace Core.Logic.Base
             return entity.Id;
         }
 
-        public bool Delete(Guid id)
+        public bool Delete(Guid id, bool needSave = true)
         {
             var entity = this.DriveContext.Set<TEntry>().Find(id);
             
             this.DriveContext.Remove(entity);
-            this.DriveContext.SaveChanges();
+            
+            if (needSave)
+                this.DriveContext.SaveChanges();
             
             return true;
         }

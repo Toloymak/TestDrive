@@ -1,5 +1,5 @@
 export enum SocketHubs {
     links = 'links',
-    blocks = 'blocks',
+    blocks = 'contexts',
     frontLinks = 'frontLinks'
 }

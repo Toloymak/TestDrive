@@ -20,9 +20,7 @@ namespace Api.Hubs
 
         public override async Task OnConnectedAsync()
         {
-            await SendMessageToAllClients();
-
-            await base.OnConnectedAsync();
+            await SendToCurrentUser();
         }
         
         public async Task Create(ContextDto contextDto)
@@ -36,7 +34,7 @@ namespace Api.Hubs
             var oldContext = this.contextReader.GetDto(contextDto.Id.GetValueOrDefault());
             if (oldContext == null)
             {
-                await Clients.Client(this.Context.ConnectionId).SendAsync("Error", "Context не найден в базе");
+                await CurrentClient.SendAsync("Error", "Context не найден в базе");
             }
 
             this.contextWriter.Update(contextDto);
@@ -47,7 +45,7 @@ namespace Api.Hubs
             var context = this.contextReader.GetDto(id);
             if (context == null)
             {
-                await Clients.Client(this.Context.ConnectionId).SendAsync("Error", "Context не найден в базе");
+                await CurrentClient.SendAsync("Error", "Context не найден в базе");
             }
 
             this.contextWriter.Delete(id);
@@ -58,6 +56,13 @@ namespace Api.Hubs
             var contextDtos = this.contextReader.GetAllDto();
 
             await Clients.All.SendAsync("Get", contextDtos);
+        }
+
+        private async Task SendToCurrentUser()
+        {
+            var contextDtos = this.contextReader.GetAllDto();
+            
+            await CurrentClient.SendAsync("Get", contextDtos);
         }
     }
 }
