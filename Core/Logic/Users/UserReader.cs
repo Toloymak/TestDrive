@@ -25,6 +25,7 @@
         public UserDto GetByName(string name)
         {
             var user = GetAllIncludeUserContext()
+                .ToList()
                 .FirstOrDefault(x => String.Equals(x.Name, name, StringComparison.CurrentCultureIgnoreCase));
 
             return this.Mapper.Map<UserDto>(user);
