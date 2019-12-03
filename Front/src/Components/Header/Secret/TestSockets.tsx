@@ -15,7 +15,6 @@ export const TestSocket: React.FC<Props> = ({ toggleVisibleListTestSocket }) => 
         const allSocket = testSocket();
         allSocket.link.getData(setLink);
         allSocket.block.getData(setBlock);
-        allSocket.front.getData(setFront);
     }, []);
 
     const closeTest = () => {
@@ -29,12 +28,8 @@ export const TestSocket: React.FC<Props> = ({ toggleVisibleListTestSocket }) => 
                 <span>{JSON.stringify(link, null, '\t')}</span>
             </div>
             <div className="testSocket_blocks">
-                <h2>_blocks</h2>
+                <h2>_contexts</h2>
                 <span>{JSON.stringify(block, null, '\t')}</span>
-            </div>
-            <div className="testSocket_front">
-                <h2>_front</h2>
-                <span>{JSON.stringify(front, null, '\t')}</span>
             </div>
         </div>
     );

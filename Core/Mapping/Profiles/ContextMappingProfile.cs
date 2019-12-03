@@ -1,10 +1,10 @@
-namespace Core.Mapping
+namespace Core.Mapping.Profiles
 {
     using AutoMapper;
 
-    using Core.Dtos;
-
     using DataLayer.Entities;
+
+    using Dtos;
 
     public class ContextMappingProfile : Profile
     {
@@ -13,6 +13,8 @@ namespace Core.Mapping
             CreateMap<Context, ContextDto>();
             CreateMap<ContextDto, Context>();
             CreateMap<Context, ContextWithLinksDto>();
+            CreateMap<Link, LinkDto>();
+            CreateMap<LinkDto, Link>();
         }
     }
 }

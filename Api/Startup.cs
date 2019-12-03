@@ -6,8 +6,9 @@
 
     using Core.Logic.Links;
     using Core.Logic.Contexts;
+    using Core.Logic.UserContexts;
     using Core.Logic.Users;
-    using Core.Mapping;
+    using Core.Mapping.Profiles;
 
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -35,7 +36,10 @@
                 .AddScoped<ContextReader>()
                 .AddScoped<LinkReader>()
                 .AddScoped<LinkWriter>()
-                .AddScoped<UserReader>();
+                .AddScoped<UserReader>()
+                .AddScoped<UserWriter>()
+                .AddScoped<UserContextWriter>()
+                .AddScoped<UserContextReader>();
 
             services.AddSignalR();
 
@@ -55,14 +59,14 @@
             {
                 app.UseHsts();
             }
-            
+            app.ConfigureCors();
+
             app.UseHttpsRedirection();
             app.UseMvcWithDefaultRoute();
             app.UseRouting();
             
             app.ConfigureSwagger();
             app.ConfigureHubs();
-            app.ConfigureCors();
         }
     }
 }

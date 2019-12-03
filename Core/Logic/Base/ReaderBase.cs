@@ -17,7 +17,10 @@ namespace Core.Logic.Base
         {
         }
 
-        public IList<TDto> GetAllDto() => this.Mapper.Map<IList<TDto>>(this.All.AsNoTracking());
+        public virtual IList<TDto> GetAllDto()
+        {
+            return this.Mapper.Map<IList<TDto>>(this.All.AsNoTracking());
+        }
 
         public TDto GetDto(Guid id) => this.Mapper.Map<TDto>(this.All.AsNoTracking().FirstOrDefault(x => x.Id == id));
     }

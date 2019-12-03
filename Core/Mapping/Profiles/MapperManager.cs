@@ -1,4 +1,4 @@
-namespace Core.Mapping
+namespace Core.Mapping.Profiles
 {
     using System.Collections.Generic;
 
@@ -11,8 +11,7 @@ namespace Core.Mapping
                 new List<Profile>
                 {
                     new ContextMappingProfile(),
-                    new ContextOrderProfile(),
-                    new HiddenContextProfile(),
+                    new UserContextProfile(),
                     new UserMappingProfile()
                 })
             ));

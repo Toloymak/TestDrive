@@ -1,4 +1,4 @@
-﻿namespace Core.Mapping
+﻿namespace Core.Mapping.Profiles
 {
     using AutoMapper;
 
@@ -11,7 +11,6 @@
         public UserMappingProfile()
         {
             CreateMap<User, UserDto>();
-            CreateMap<User, UserNameDto>();
             CreateMap<UserDto, User>();
         }
     }
