@@ -8,7 +8,7 @@ namespace DataLayer
     {
         public DriveContext()
         {
-            this.Database.EnsureCreated();
+            // this.Database.EnsureCreated();
         }
         
         public DbSet<Link> Links { get; set; }
