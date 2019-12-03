@@ -9,6 +9,6 @@ namespace Core.Dtos
 
         [Description("Тест описания")]
         public string Name { get; set; }
-        public int Priority { get; set; }
+        public int IndexNumber { get; set; }
     }
 }

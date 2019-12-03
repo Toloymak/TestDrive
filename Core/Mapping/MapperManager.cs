@@ -10,6 +10,7 @@ namespace Core.Mapping
             new Mapper(new MapperConfiguration(c => c.AddProfiles(
                 new List<Profile>
                 {
+                    new LinkMappingProfile(),
                     new ContextMappingProfile(),
                     new ContextOrderProfile(),
                     new HiddenContextProfile(),
