@@ -10,5 +10,7 @@ namespace Core.Dtos
         public string Description { get; set; }
         public int Priority { get; set; }
         public Guid ContextId { get; set; }
+        public Guid UserId { get; set; }
+        public DateTime EndOfUse { get; set; }
     }
 }
