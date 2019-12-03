@@ -45,7 +45,12 @@
             linkWriter.Update(linkDto);
             await SendMessageToAllClients();
         }
-        
+
+        public async Task UpdateUsing()
+        {
+
+        }
+
         public async Task Delete(Guid id)
         {
             var oldLink = linkReader.GetDto(id);
